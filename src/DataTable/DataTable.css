@@ -1,3 +1,27 @@
-.table-img{
+.alert-nodata {
+    text-align: center;
+    font-size: var(--font-xlarge);
+    border: 2px solid var(--text-color);
+    border-radius: 5px;
+    padding: 5px 0;
+}
+
+table {
+    padding: 4px 8px 12px 8px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th{
+    cursor: pointer;
+}
+
+
+.table-img {
     width: 70px;
 }

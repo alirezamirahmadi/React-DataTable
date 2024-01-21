@@ -15,7 +15,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {column.field.map((field) => (
-            <input key={field.title} onChange={(event) => field.eventHandler && field.eventHandler(event)} className='form-control' type='text' />            
+            <input key={field.title} onChange={(event) => field.eventHandlerRow && field.eventHandlerRow(event)} className='form-control' type='text' />            
             ))}
         </>
       )
@@ -33,7 +33,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {column.field.map((field) => (
-            <button key={field.title} onClick={() => field.eventHandler && field.eventHandler(row)} className="icon-btn">{field.title}</button>
+            <button key={field.title} onClick={() => field.eventHandlerRow && field.eventHandlerRow(row)} className="icon-btn">{field.title}</button>
           ))}
         </>
       )
@@ -42,7 +42,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {column.field.map((field) => (
-            <input checked={row[field.title]} key={field.title} onChange={(event) => field.eventHandler && field.eventHandler(event)} className='' type='checkbox' />                        
+            <input checked={row[field.title]} key={field.title} onChange={(event) => field.eventHandlerRow && field.eventHandlerRow(event)} className='' type='checkbox' />                        
           ))}
         </>
       )

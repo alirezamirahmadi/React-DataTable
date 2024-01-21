@@ -6,13 +6,13 @@ const editProduct =(value:any)=>{
   console.log(value);
 }
 const tableHeader:ColumnType[] = [
-  { field: [{title:'id'}], label: 'ID', kind: 'text' },
+  { field: [{title:'id'}], label: 'ID', kind: 'text'},
   { field: [{title:'image'}], label: 'Image', kind: 'image' },
   { field: [{title:'pname'}], label: 'Name', kind: 'text' },
   { field: [{title:'section'}], label: 'Section', kind: 'text' },
   { field: [{title:'price'}], label: 'Price', kind: 'text' },
   { field: [{title:'stock'}], label: 'Stock', kind: 'text' },
-  { field: [{ title: 'click me!', eventHandler: editProduct }], label: 'Modify', kind: 'button' },
+  { field: [{ title: 'click me!', eventHandlerRow: editProduct }], label: 'Modify', kind: 'button' },
 ]
 let products = [
   {id:1, section:'Phone', pname:'Redmi 9', image:'logo192.png', price:'120', stock:5},
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-      <DataTable columns={tableHeader} rows={products}/>
+      <DataTable direction='ltr' columns={tableHeader} rows={products}/>
     </>
   )
 }

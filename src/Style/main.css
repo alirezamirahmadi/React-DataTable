@@ -1,0 +1,17 @@
+:root{
+  --first-color:#F95700;
+  --second-color:#FFF;
+  --text-color:#1D1B1B;
+
+  --font-bold:RubikBold;
+  --font-xsmall:15px;
+  --font-small:20px;
+  --font-medium:25px;
+  --font-large:30px;
+  --font-xlarge:35px;
+
+}
+body{
+  font-family: Rubik;
+  color: var(--text-color);
+}
