@@ -47,13 +47,13 @@ export default function DataTable({ direction = 'rtl', columns, rows }: DataTabl
   }
 
   return (
-    <div dir={direction}>
+    <div id='div-table' dir={direction}>
       {
         rows.length === 0 &&
         <div className="alert-nodata">No data found</div>
       }
       <Menu columns={columnData} displayColumn={displayColumn} />
-      <table id='data-table' className="">
+      <table id='data-table' style={{borderCollapse:'collapse', }}>
         <thead>
           <tr>
             {
