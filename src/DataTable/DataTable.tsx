@@ -46,14 +46,32 @@ export default function DataTable({ direction = 'rtl', columns, rows }: DataTabl
     setColumnData(tempColumn);
   }
 
+  const handleSearch = (value: string) => {
+    if (value === '') {
+      setRowData(rows);
+      return;
+    }
+    
+    let tempRow: any[] = [];
+    let includeValue: boolean = false;
+    rowData.map((data: any) => {
+      includeValue = false;
+      columnData.map(column => {
+        if ((data[column.field[0].title] + '').toString().includes(value) && column.option?.display != false) includeValue = true;
+      })
+      includeValue && tempRow.push(data);
+    })
+    setRowData(tempRow);
+  }
+
   return (
     <div id='div-table' dir={direction}>
       {
         rows.length === 0 &&
         <div className="alert-nodata">No data found</div>
       }
-      <Menu columns={columnData} displayColumn={displayColumn} />
-      <table id='data-table' style={{borderCollapse:'collapse', }}>
+      <Menu columns={columnData} displayColumn={displayColumn} handleSearch={handleSearch} />
+      <table id='data-table' style={{ borderCollapse: 'collapse', }}>
         <thead>
           <tr>
             {
