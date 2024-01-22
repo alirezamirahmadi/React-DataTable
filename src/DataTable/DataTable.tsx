@@ -7,9 +7,10 @@ import Cell from '../Cell/Cell'
 import { DataTableType, ColumnType } from '../Type/Type'
 import './DataTable.css'
 
-export default function DataTable({ direction = 'rtl', columns, rows }: DataTableType) {
+export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRow }: DataTableType) {
   const [rowData, setRowData] = useState(rows);
   const [columnData, setColumnData] = useState<ColumnType[]>(columns);
+  const [countSelectedRows, setCountSelectedRows] = useState<number>(0);
   const sortedField = useRef({ title: '', kind: true });
 
   const sortData = (fieldTitle: string) => {
@@ -51,7 +52,7 @@ export default function DataTable({ direction = 'rtl', columns, rows }: DataTabl
       setRowData(rows);
       return;
     }
-    
+
     let tempRow: any[] = [];
     let includeValue: boolean = false;
     rowData.map((data: any) => {
@@ -64,16 +65,44 @@ export default function DataTable({ direction = 'rtl', columns, rows }: DataTabl
     setRowData(tempRow);
   }
 
+  const selectAllRows = (checked: boolean) => {
+    let selectRow = (document.querySelectorAll('.td-select-row') as NodeListOf<HTMLInputElement>);
+    selectRow.forEach(element => {
+      element.checked = checked;
+    })
+    setCountSelectedRows(checked ? selectRow.length : 0);
+  }
+
+  const selectRow = (checked: boolean, rowData: any) => {
+    setCountSelectedRows(preValue => checked ? preValue + 1 : preValue - 1);
+  }
+
+  const handleDelete = () => {
+    let tempRows = [...rowData];
+    let selectedRows: any[] = [];
+    let selectRow = (document.querySelectorAll('.td-select-row') as NodeListOf<HTMLInputElement>);
+    selectRow.forEach((element, index) => {
+      element.checked && selectedRows.push(tempRows.splice(index - selectedRows.length, 1));
+    })
+    onDeleteRow && onDeleteRow(selectedRows);
+    setRowData(tempRows);
+    console.log(selectedRows);
+    
+  }
+
   return (
     <div id='div-table' dir={direction}>
       {
         rows.length === 0 &&
         <div className="alert-nodata">No data found</div>
       }
-      <Menu columns={columnData} displayColumn={displayColumn} handleSearch={handleSearch} />
-      <table id='data-table' style={{ borderCollapse: 'collapse', }}>
+      <Menu countSelectedRows={countSelectedRows} columns={columnData} displayColumn={displayColumn} handleSearch={handleSearch} handleDelete={handleDelete} />
+      <table id='data-table'>
         <thead>
           <tr>
+            <th>
+              <input type="checkbox" onChange={event => selectAllRows(event.target.checked)} />
+            </th>
             {
               columnData.map(header => (
                 <th key={header.field[0].title} style={{ display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field[0].title)}>
@@ -89,6 +118,9 @@ export default function DataTable({ direction = 'rtl', columns, rows }: DataTabl
           {
             rowData.map((data: any) => (
               <tr key={data.id}>
+                <td>
+                  <input type="checkbox" className='td-select-row' onChange={(event) => selectRow(event.target.checked, data)} />
+                </td>
                 {
                   columnData.map((header) => (
                     <td key={header.field[0].title} style={{ display: header.option?.display === false ? 'none' : 'table-cell' }}>
