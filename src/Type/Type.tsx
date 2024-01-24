@@ -25,5 +25,11 @@ type DataTableType = {
   onDeleteRow?: (rows: any[]) => void;
 }
 
+type filterType = {
+  column:{value:string, label:string},
+  condition:{value:string, label:string},
+  text:string,
+}
 
-export type { DataTableType, ColumnType }
+
+export type { DataTableType, ColumnType, filterType }

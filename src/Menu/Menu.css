@@ -1,4 +1,5 @@
 .main-block{
+  height: 35px;
   position: relative;
 }
 
@@ -39,5 +40,63 @@
   border: none;
   background-color: var(--second-color);
   margin-top: 2px;
+  cursor: pointer;
+}
+
+.select-block{
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter{
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  background-color: var(--second-color);
+  position: absolute;
+  padding: 10px 5px;
+}
+
+.filter-item{
+  display: flex;
+  justify-items: center;
+}
+
+.filter-item__column{
+margin: 0 3px;
+height: 25px;
+}
+
+.filter-item__condition{
+  margin: 0 3px;
+  height: 25px;
+  
+}
+
+.filter-item__text{
+  margin: 0 3px;
+  height: 19px;
+}
+
+.filter__add{
+  cursor: pointer;
+}
+
+.filter-list{
+  list-style: none;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.filter-list__li{
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  border-bottom: 1px solid var(--text-color);
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+.filter-list__remove{
   cursor: pointer;
 }

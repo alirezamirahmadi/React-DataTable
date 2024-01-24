@@ -4,7 +4,7 @@ import arrowDown from '../../public/svg/arrow-down.svg'
 import arrowUp from '../../public/svg/arrow-up.svg'
 import Menu from '../Menu/Menu';
 import Cell from '../Cell/Cell'
-import { DataTableType, ColumnType } from '../Type/Type'
+import { DataTableType, ColumnType, filterType } from '../Type/Type'
 import './DataTable.css'
 
 export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRow }: DataTableType) {
@@ -90,13 +90,37 @@ export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRo
     
   }
 
+  const handleFilter = (listFilter:filterType[]) => {
+    let tempRows = [...rows];
+    listFilter.map(filter => {
+      switch (filter.condition.value) {
+        case 'Equal':
+          tempRows = [...tempRows].filter(row => row[filter.column.value].toString() === filter.text);          
+          break;
+        case 'NotEqual':
+          tempRows = [...tempRows].filter(row => row[filter.column.value].toString() != filter.text);          
+          break;
+        case 'Include':
+          tempRows = [...tempRows].filter(row => row[filter.column.value].toString().includes(filter.text));          
+          break;
+          case 'DontInclude':
+          tempRows = [...tempRows].filter(row => !row[filter.column.value].toString().includes(filter.text));                    
+          break;
+      
+        default:
+          break;
+      }
+    })
+    setRowData(tempRows);
+  }
+
   return (
     <div id='div-table' dir={direction}>
       {
         rows.length === 0 &&
         <div className="alert-nodata">No data found</div>
       }
-      <Menu countSelectedRows={countSelectedRows} columns={columnData} displayColumn={displayColumn} handleSearch={handleSearch} handleDelete={handleDelete} />
+      <Menu countSelectedRows={countSelectedRows} columns={columnData} displayColumn={displayColumn} handleSearch={handleSearch} handleDelete={handleDelete} handleFilter={handleFilter} />
       <table id='data-table'>
         <thead>
           <tr>
