@@ -24,7 +24,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {column.field.map((field) => (
-            <img key={field.title} src={row[field.title]} className='table-img' />            
+            <img key={field.title} src={row[field.title]} width={70} />            
           ))}
         </>
       )

@@ -1,0 +1,28 @@
+.pagination{
+    margin: 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.pages--center{
+    justify-content: center;
+}
+.pages--right{
+    justify-content: right;
+}
+.pages--left{
+    justify-content: left;
+}
+
+.pages__no{
+    border: none;
+    cursor: pointer;
+    background-color: unset;
+    margin: 0 1px;
+}
+
+.per-page{
+    height: 23px;
+    border-radius: 5px;
+    padding: 0 4px;
+    margin: 0 5px;
+}

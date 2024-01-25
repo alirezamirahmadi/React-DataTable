@@ -31,5 +31,26 @@ type filterType = {
   text:string,
 }
 
+type PaginationType = {
+  pageCount: number,
+  currentPage: number,
+  pageNoHandler: (pageNo: number, rowPerPAge:number) => void,
+  justifyContent?: string,
+  next?: boolean,
+  previous?: boolean,
+  first?: boolean,
+  last?: boolean,
+}
 
-export type { DataTableType, ColumnType, filterType }
+type ButtonType = {
+  text: string | React.JSX.Element,
+  startIcon?: any,
+  size: 'small' | 'medium' | 'large',
+  clickHandler: () => void,
+  disabled?: boolean,
+  className: string,
+  classStyle?: 'button-main' | 'button-second' | 'button-text',
+}
+
+
+export type { DataTableType, ColumnType, filterType, PaginationType, ButtonType }
