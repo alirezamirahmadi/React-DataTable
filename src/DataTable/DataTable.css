@@ -1,8 +1,8 @@
 .alert-nodata {
     text-align: center;
     font-size: var(--font-xlarge);
-    border: 2px solid var(--text-color);
-    border-radius: 5px;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
     padding: 5px 0;
 }
 
@@ -12,15 +12,16 @@
     width: 100%;
 }
 
-.tr-body__select-row {
+th, td{
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid;
+}
+
+.tr-body__select-row {
     text-align: center;
 }
 
 .tr-body__data {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
     text-align: center;
 }
 
@@ -46,8 +47,8 @@
     }
 
     .tr-body {
-        border-top: solid 2px rgba(0, 0, 0, 0.15);
-        border-bottom: solid 2px rgba(0, 0, 0, 0.15);
+        border-top: 2px solid;
+        border-bottom: 2px solid;
         width: 100%;
     }
 

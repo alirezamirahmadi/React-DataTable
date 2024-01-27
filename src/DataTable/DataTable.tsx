@@ -6,9 +6,11 @@ import Menu from '../Menu/Menu';
 import Cell from '../Cell/Cell'
 import Pagination from '../Pagination/Pagination';
 import { DataTableType, ColumnType, filterType } from '../Type/Type'
+import defaultOptions from '../Options/defaultOptions';
 import './DataTable.css'
 
-export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRow }: DataTableType) {
+export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRow, options: listOptions }: DataTableType) {
+  const [options, setOptions] = useState({...defaultOptions, ...listOptions });
   const [rowData, setRowData] = useState(rows);
   const [currentRows, setCurrentRows] = useState<any[]>([]);
   const [columnData, setColumnData] = useState<ColumnType[]>(columns);
@@ -16,6 +18,7 @@ export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRo
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowPerPage, setRowPerPage] = useState<number>(10);
   const sortedField = useRef({ title: '', kind: true });
+  
 
   const sortData = (fieldTitle: string) => {
     let tempData = [...rowData];
@@ -83,8 +86,6 @@ export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRo
     })
     onDeleteRow && onDeleteRow(selectedRows);
     setRowData(tempRows);
-    console.log(selectedRows);
-
   }
 
   const handleFilter = (listFilter: filterType[]) => {
@@ -130,22 +131,18 @@ export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRo
   }, [rowPerPage])
 
   return (
-    <div id='div-table' dir={direction}>
-      {
-        rows.length === 0 &&
-        <div className="alert-nodata">No data found</div>
-      }
-      <Menu countSelectedRows={countSelectedRows} columns={columnData} displayColumn={displayColumn} handleSearch={handleSearch} handleDelete={handleDelete} handleFilter={handleFilter} />
+    <div id='div-table' dir={direction} style={{ color: options?.color?.color, backgroundColor: options?.color?.backgroundColor, borderColor: options?.color?.borderColor }}>
+      <Menu countSelectedRows={countSelectedRows} columns={columnData} options={options} displayColumn={displayColumn} handleSearch={handleSearch} handleDelete={handleDelete} handleFilter={handleFilter} />
       <table id='data-table' className='table'>
         <thead>
           <tr className='tr-head'>
-            <th>
+            <th style={{ borderColor: options?.color?.borderColor }}>
               <input type="checkbox" onChange={event => selectAllRows(event.target.checked)} />
             </th>
             {
               columnData.map(header => (
-                <th key={header.field[0].title} style={{ display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field[0].title)}>
-                  <span className='tr-head__header-label'>{header.label}</span>
+                <th key={header.field[0].title} style={{ borderColor: options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field[0].title)}>
+                  <span className='tr-head__header-label' title={header.option?.sort ? options.textLabels?.body?.toolTip : ''}>{header.label}</span>
                   {sortedField.current.title === header.field[0].title && !sortedField.current.kind && <img src={arrowDown} width={15} />}
                   {sortedField.current.title === header.field[0].title && sortedField.current.kind && <img src={arrowUp} width={15} />}
                 </th>
@@ -157,12 +154,12 @@ export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRo
           {
             currentRows.map((data: any) => (
               <tr key={data.id} className='tr-body'>
-                <td className='tr-body__select-row'>
+                <td className='tr-body__select-row' style={{ borderColor: options?.color?.borderColor }}>
                   <input type="checkbox" className='td-select-row' onChange={(event) => selectRow(event.target.checked, data)} />
                 </td>
                 {
                   columnData.map((header) => (
-                    <td key={header.field[0].title} className='tr-body__data' style={{ display: header.option?.display === false ? 'none' : 'table-cell' }}>
+                    <td key={header.field[0].title} className='tr-body__data' style={{ borderColor: options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }}>
                       <div className="cell-data">
                         <span className='cell-data__label'>{header.label}</span>
                         <Cell column={header} row={data} />
@@ -175,7 +172,11 @@ export default function DataTable({ direction = 'rtl', columns, rows, onDeleteRo
           }
         </tbody>
       </table>
-      <Pagination pageCount={Math.ceil(rowData.length / rowPerPage)} currentPage={currentPage} pageNoHandler={pageNoHandler} previous next first last />
+      {
+        rowData.length === 0 &&
+        <div className="alert-nodata">{options.textLabels?.body?.noMatch}</div>
+      }
+      <Pagination pageCount={Math.ceil(rowData.length / rowPerPage)} currentPage={currentPage} options={options} pageNoHandler={pageNoHandler} previous next first last />
     </div>
   )
 }

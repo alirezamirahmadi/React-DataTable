@@ -1,5 +1,5 @@
 .pagination{
-    margin: 1rem 1rem;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -16,7 +16,9 @@
 .pages__no{
     border: none;
     cursor: pointer;
-    background-color: unset;
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
     margin: 0 1px;
 }
 
@@ -25,4 +27,7 @@
     border-radius: 5px;
     padding: 0 4px;
     margin: 0 5px;
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
 }

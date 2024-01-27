@@ -23,18 +23,70 @@ type DataTableType = {
   columns: ColumnType[],
   rows: any,
   onDeleteRow?: (rows: any[]) => void;
+  options?: OptionType,
+}
+
+type OptionType = {
+  color?: {
+    color?: string,
+    backgroundColor?: string,
+    borderColor?: string,
+  },
+  textLabels?: {
+    body?: {
+      noMatch?: string,
+      toolTip?: string,
+    },
+    pagination?: {
+      first?:string,
+      last?:string,
+      next?: string,
+      previous?: string,
+      rowsPerPage?: string,
+      displayRows?: string,
+    },
+    menu?: {
+      search?: string,
+      downloadExcel?: string,
+      print?: string,
+      viewColumns?: string,
+      filterTable?: string,
+    },
+    filter?: {
+      title?: string,
+    },
+    viewColumns?: {
+      title?: string,
+      titleItem?: string,
+    },
+    selectedRows?: {
+      text?: string,
+      delete?: string,
+    },
+  }
+}
+
+type MenuType = {
+  countSelectedRows: number,
+  columns: ColumnType[],
+  options?:OptionType,
+  displayColumn: (checked: boolean, lable: string) => void,
+  handleSearch: (value: string) => void,
+  handleDelete: () => void,
+  handleFilter: (filters: filterType[]) => void,
 }
 
 type filterType = {
-  column:{value:string, label:string},
-  condition:{value:string, label:string},
-  text:string,
+  column: { value: string, label: string },
+  condition: { value: string, label: string },
+  text: string,
 }
 
 type PaginationType = {
   pageCount: number,
   currentPage: number,
-  pageNoHandler: (pageNo: number, rowPerPAge:number) => void,
+  options?:OptionType,
+  pageNoHandler: (pageNo: number, rowPerPAge: number) => void,
   justifyContent?: string,
   next?: boolean,
   previous?: boolean,
@@ -53,4 +105,4 @@ type ButtonType = {
 }
 
 
-export type { DataTableType, ColumnType, filterType, PaginationType, ButtonType }
+export type { DataTableType, ColumnType, MenuType, filterType, PaginationType, ButtonType, OptionType }

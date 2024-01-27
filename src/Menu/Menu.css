@@ -1,25 +1,31 @@
-.main-block{
+.main-block {
   height: 35px;
   position: relative;
+  border-bottom: 2px solid;
+  padding: 8px;
 }
 
-.main-block__img{
+.main-block__img {
   cursor: pointer;
   margin: 2px 4px;
+  width: 25px;
 }
 
 .show-column {
   list-style: none;
   position: absolute;
+  inset-inline-start: 5px;
   top: 10px;
   z-index: 2;
   padding: 15px;
-  background-color: var(--second-color);
   border: 1px solid var(--text-color);
   border-radius: 7px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
-.search{
+.search {
   display: inline;
   position: absolute;
   top: 3px;
@@ -29,74 +35,97 @@
   height: 25px;
 }
 
-.search__input{
-  border:none;
+.search__input {
+  border: none;
   outline: none;
   height: 15px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
-.search__close{
-  color: var(--text-color);
+.search__close {
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
   border: none;
-  background-color: var(--second-color);
   margin-top: 2px;
   cursor: pointer;
 }
 
-.select-block{
+.select-block {
   height: 35px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 2px solid;
+  padding: 8px;
 }
 
-.filter{
-  border: 1px solid var(--text-color);
+.filter {
+  border: 1px solid;
   border-radius: 5px;
-  background-color: var(--second-color);
   position: absolute;
   padding: 10px 5px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
-.filter-item{
+.filter-item {
   display: flex;
   justify-items: center;
+  margin-top: 5px;
 }
 
-.filter-item__column{
-margin: 0 3px;
-height: 25px;
-}
-
-.filter-item__condition{
+.filter-item__column {
   margin: 0 3px;
   height: 25px;
-  
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
-.filter-item__text{
+.filter-item__condition {
+  margin: 0 3px;
+  height: 25px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+}
+
+.filter-item__text {
   margin: 0 3px;
   height: 19px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
-.filter__add{
+.filter__add {
   cursor: pointer;
 }
 
-.filter-list{
+.filter-list {
   list-style: none;
   margin: 0;
   padding: 0 10px;
 }
 
-.filter-list__li{
+.filter-list__li {
   display: flex;
   justify-content: space-between;
   justify-items: center;
-  border-bottom: 1px solid var(--text-color);
+  border-bottom: 1px solid;
   margin: 5px 0;
   padding: 5px 0;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
 
-.filter-list__remove{
+.filter-list__remove {
   cursor: pointer;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
 }
