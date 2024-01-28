@@ -28,7 +28,9 @@ const defaultOptions: OptionType = {
       filterTable: "Filter Table",
     },
     filter: {
-      title:"Filter Table"
+      title:"Filter Table",
+      add:'Add Filter',
+      delete:'Delete Filter',
     },
     viewColumns: {
       title: "Show Columns",

@@ -1,0 +1,20 @@
+
+.show-column {
+  list-style: none;
+  position: absolute;
+  inset-inline-start: 5px;
+  top: 20px;
+  z-index: 2;
+  padding: 15px;
+  border: 1px solid;
+  border-radius: 7px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+}
+
+.show-column__title{
+  display: flex;
+  gap: 10px;
+}
+

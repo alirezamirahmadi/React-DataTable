@@ -39,7 +39,7 @@ function App() {
 
   return (
     <>
-      <DataTable direction='ltr' columns={tableHeader} rows={products} options={{ color: { color: 'red', backgroundColor: 'black', borderColor:'yellow' } }} />
+      <DataTable direction='ltr' columns={tableHeader} allRows={products} options={{ color: { color: 'white', backgroundColor: 'black', borderColor:'#ddd' } }} />
     </>
   )
 }

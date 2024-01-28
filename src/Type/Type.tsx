@@ -18,12 +18,35 @@ type ColumnType = {
   eventHandlerHeader?: (value: any) => void,
 }
 
-type DataTableType = {
+type ContextType = {
+  rowData: any,
+  columnData: ColumnType[],
+  showMenuSubItems:{filter:boolean, search:boolean, displayColumns:boolean},
+  countSelectedRows: number,
+  options?: OptionType,
+  setRowData:(rowData:any) => void,
+  setColumnData:(columnData:any) => void,
+  setShowMenuSubItems:(columnData:any) => void,
+  setCountSelectedRows:(count:number) => void,
+  handleFilter: (listFilter: filterType[]) => void;
+  handleSearch: (value: string) => void;
+  displayColumn: (checked: boolean, label: string) => void;
+  onDeleteRow?: (rows: any[]) => void;
+}
+
+type ReactDataTableType = {
   direction?: 'rtl' | 'ltr' | 'inherit',
   columns: ColumnType[],
-  rows: any,
-  onDeleteRow?: (rows: any[]) => void;
+  allRows: any,
   options?: OptionType,
+  onDeleteRow?: (rows: any[]) => void;
+}
+
+type DataTableType = {
+  // direction?: 'rtl' | 'ltr' | 'inherit',
+  // columns: ColumnType[],
+  // allRows: any,
+  // options?: OptionType,
 }
 
 type OptionType = {
@@ -38,8 +61,8 @@ type OptionType = {
       toolTip?: string,
     },
     pagination?: {
-      first?:string,
-      last?:string,
+      first?: string,
+      last?: string,
       next?: string,
       previous?: string,
       rowsPerPage?: string,
@@ -54,6 +77,8 @@ type OptionType = {
     },
     filter?: {
       title?: string,
+      add?: string,
+      delete?: string,
     },
     viewColumns?: {
       title?: string,
@@ -67,13 +92,13 @@ type OptionType = {
 }
 
 type MenuType = {
-  countSelectedRows: number,
-  columns: ColumnType[],
-  options?:OptionType,
-  displayColumn: (checked: boolean, lable: string) => void,
-  handleSearch: (value: string) => void,
-  handleDelete: () => void,
-  handleFilter: (filters: filterType[]) => void,
+  // countSelectedRows: number,
+  // columns: ColumnType[] | undefined,
+  // options?: OptionType,
+  // displayColumn: (checked: boolean, lable: string) => void,
+  // handleSearch: (value: string) => void,
+  // handleDelete: () => void,
+  // handleFilter?: (filters: filterType[]) => void,
 }
 
 type filterType = {
@@ -85,7 +110,6 @@ type filterType = {
 type PaginationType = {
   pageCount: number,
   currentPage: number,
-  options?:OptionType,
   pageNoHandler: (pageNo: number, rowPerPAge: number) => void,
   justifyContent?: string,
   next?: boolean,
@@ -105,4 +129,5 @@ type ButtonType = {
 }
 
 
-export type { DataTableType, ColumnType, MenuType, filterType, PaginationType, ButtonType, OptionType }
+export type { DataTableType, ColumnType, MenuType, filterType, PaginationType, ButtonType, OptionType, 
+ContextType, ReactDataTableType }

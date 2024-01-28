@@ -1,5 +1,5 @@
 
-import { ColumnType } from "../Type/Type"
+import { ColumnType } from "../../Type/Type"
 
 export default function Cell({ column, row }: { column: ColumnType, row: any }) {
   switch (column.kind) {

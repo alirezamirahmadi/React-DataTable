@@ -1,0 +1,27 @@
+.search {
+  display: inline;
+  position: absolute;
+  top: 7px;
+  border: 2px solid var(--text-color);
+  border-radius: 7px;
+  padding: 0 2px;
+  height: 25px;
+}
+
+.search__input {
+  border: none;
+  outline: none;
+  height: 15px;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+}
+
+.search__close {
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+  border: none;
+  margin-top: 2px;
+  cursor: pointer;
+}
