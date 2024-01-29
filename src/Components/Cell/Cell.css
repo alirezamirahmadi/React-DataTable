@@ -1,0 +1,23 @@
+.progress-field{
+  height: 30px;
+  margin: 2px;
+}
+
+.select-field{
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+
+.select-field__option{
+  color:inherit;
+  background-color: inherit;
+  border-color: inherit;
+}
+
+.button-field{
+  color:inherit;
+  background-color: inherit;
+  border-color: inherit;
+  border-radius: 4px;
+  padding: 3px 5px;
+}

@@ -13,7 +13,7 @@ type ColumnOptionType = {
 type ColumnType = {
   field: FieldColumnType[],
   label: string,
-  kind: 'text' | 'textBox' | 'button' | 'image' | 'boolean',
+  kind: 'text' | 'input/textbox' | 'input/date' | 'input/datetime-local' | 'input/number' | 'input/file' | 'input/password' | 'textarea' | 'button' | 'image' | 'boolean' | 'select' | 'progress',
   option?: ColumnOptionType,
   eventHandlerHeader?: (value: any) => void,
 }
@@ -21,13 +21,13 @@ type ColumnType = {
 type ContextType = {
   rowData: any,
   columnData: ColumnType[],
-  showMenuSubItems:{filter:boolean, search:boolean, displayColumns:boolean},
+  showMenuSubItems: { filter: boolean, search: boolean, displayColumns: boolean },
   countSelectedRows: number,
   options?: OptionType,
-  setRowData:(rowData:any) => void,
-  setColumnData:(columnData:any) => void,
-  setShowMenuSubItems:(columnData:any) => void,
-  setCountSelectedRows:(count:number) => void,
+  setRowData: (rowData: any) => void,
+  setColumnData: (columnData: any) => void,
+  setShowMenuSubItems: (columnData: any) => void,
+  setCountSelectedRows: (count: number) => void,
   handleFilter: (listFilter: filterType[]) => void;
   handleSearch: (value: string) => void;
   displayColumn: (checked: boolean, label: string) => void;
@@ -129,5 +129,7 @@ type ButtonType = {
 }
 
 
-export type { DataTableType, ColumnType, MenuType, filterType, PaginationType, ButtonType, OptionType, 
-ContextType, ReactDataTableType }
+export type {
+  DataTableType, ColumnType, MenuType, filterType, PaginationType, ButtonType, OptionType,
+  ContextType, ReactDataTableType
+}
