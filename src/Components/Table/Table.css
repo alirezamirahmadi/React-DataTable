@@ -12,7 +12,13 @@
     width: 100%;
 }
 
-th, td{
+th {
+    resize: horizontal;
+    overflow: auto
+}
+
+th,
+td {
     padding: 8px;
     border-bottom: 1px solid;
 }

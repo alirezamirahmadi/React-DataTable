@@ -49,7 +49,7 @@ export default function Table() {
   }
 
   const closeMenuSubItems = () => {
-    mainContext.setShowMenuSubItems({filter:false, search:false, displayColumns:false});
+    mainContext.setShowMenuSubItems({ filter: false, search: false, displayColumns: false });
   }
 
   useEffect(() => {

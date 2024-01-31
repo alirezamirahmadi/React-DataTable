@@ -11,6 +11,7 @@
 .filter__title{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .filter-item {
@@ -21,26 +22,29 @@
 
 .filter-item__column {
   margin: 0 3px;
-  height: 25px;
+  height: 28px;
   color: inherit;
   background-color: inherit;
   border-color: inherit;
+  border-radius: 5px;
 }
 
 .filter-item__condition {
   margin: 0 3px;
-  height: 25px;
+  height: 28px;
   color: inherit;
   background-color: inherit;
   border-color: inherit;
+  border-radius: 5px;
 }
 
 .filter-item__text {
   margin: 0 3px;
-  height: 19px;
+  height: 22px;
   color: inherit;
   background-color: inherit;
   border-color: inherit;
+  border-radius: 5px;
 }
 
 .filter__add {
