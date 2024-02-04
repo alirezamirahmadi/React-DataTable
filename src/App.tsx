@@ -2,6 +2,8 @@
 import DataTable from './DataTable/DataTable';
 import { ColumnType } from './Type/Type';
 
+import Example from '../examples/Example-img/ExampleImg'
+
 const editProduct = (value: any) => {
   console.log(value);
 }
@@ -13,19 +15,20 @@ const tableHeader: ColumnType[] = [
   { field: [{ title: 'price' }], label: 'Price', kind: 'text', option: { sort: true } },
   { field: [{ title: 'stock' }], label: 'Stock', kind: 'text' },
   { field: [{ title: 'cites' }], label: 'Cites', kind: 'select' },
+  { field: [{ title: 'active' }], label: 'Active', kind: 'boolean' },
   { field: [{ title: 'progress' }], label: 'Progress', kind: 'progress' },
   { field: [{ title: 'desc' }], label: 'Description', kind: 'input/datetime-local' },
   { field: [{ title: 'click me!', eventHandlerRow: editProduct }], label: 'Modify', kind: 'button' },
 ]
 let products = [
-  { id: 1, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5, cites:[1, 2, 3], desc:'2024-02-05 12:55' },
-  { id: 2, section: 'Phone', pname: 'Redmi Note 10', image: 'logo192.png', price: '160', stock: 12, cites:['anna', 'lena'] },
+  { id: 1, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5, cites: { value: 2, options: [1, 2, 3] }, desc: '2024-02-05 12:55' },
+  { id: 2, section: 'Phone', pname: 'Redmi Note 10', image: 'logo192.png', price: '160', stock: 12, cites: { value: 'alireza', options: ['anna', 'lena', 'alireza'] } },
   { id: 3, section: 'Laptop', pname: 'Asus A10', image: 'logo192.png', price: '320', stock: 52, },
-  { id: 4, section: 'Laptop', pname: 'hp RE4', image: 'logo192.png', price: '400', stock: 15, progress:['20', 'o'] },
-  { id: 5, section: 'Monitor', pname: 'Samsung 22', image: 'logo192.png', price: '170', stock: 67, progress:[200, 500] },
-  { id: 6, section: 'Monitor', pname: 'LG 20', image: 'logo192.png', price: '120', stock: 34 },
-  { id: 7, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5 },
-  { id: 8, section: 'Phone', pname: 'Redmi Note 10', image: 'logo192.png', price: '160', stock: 12 },
+  { id: 4, section: 'Laptop', pname: 'hp RE4', image: 'logo192.png', price: '400', stock: 15, progress: ['20', 'o'] },
+  { id: 5, section: 'Monitor', pname: 'Samsung 22', image: 'logo192.png', price: '170', stock: 67, progress: [200, 500] },
+  { id: 6, section: 'Monitor', pname: 'LG 20', image: 'logo192.png', price: '120', stock: 34, active: true },
+  { id: 7, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5, active: true },
+  { id: 8, section: 'Phone', pname: 'Redmi Note 10', image: 'logo192.png', price: '160', stock: 12, active: false },
   { id: 9, section: 'Laptop', pname: 'Asus A10', image: 'logo192.png', price: '320', stock: 52 },
   { id: 10, section: 'Laptop', pname: 'hp RE4', image: 'logo192.png', price: '400', stock: 15 },
   { id: 11, section: 'Monitor', pname: 'Samsung 22', image: 'logo192.png', price: '170', stock: 67 },
@@ -42,7 +45,8 @@ function App() {
 
   return (
     <>
-      <DataTable direction='ltr' columns={tableHeader} allRows={products} options={{ color: { color: 'white', backgroundColor: 'black', borderColor:'#ddd' } }} />
+      <Example />
+      <DataTable direction='ltr' columns={tableHeader} rows={products} options={{selectableRowsHideCheckboxes:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} />
     </>
   )
 }

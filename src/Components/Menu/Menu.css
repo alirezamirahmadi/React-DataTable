@@ -19,3 +19,9 @@
   padding: 8px;
 }
 
+.title-table{
+  font-size: var(--font-medium);
+  position: sticky;
+  left: 47%;
+}
+

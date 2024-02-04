@@ -7,8 +7,24 @@ const defaultOptions: OptionType = {
     backgroundColor: '#fff',
     borderColor: '#ddd'
   },
+  download: true,
+  filter: true,
+  print: true,
+  search: true,
+  viewColumns: true,
+  pagination: true,
+  resizableColumns: true,
+  responsive: true,
+  rowsPerPage: 10,
+  rowsPerPageOptions: [5, 10, 20, 50, 100],
+  searchPlaceholder: '',
+  selectableRowsHideCheckboxes: false,
+  cells: {
+    imageWidth: 60,
+  },
   textLabels: {
     body: {
+      title: '',
       noMatch: "Sorry, no data found",
       toolTip: "Sort",
     },
@@ -18,7 +34,6 @@ const defaultOptions: OptionType = {
       next: "Next Page",
       previous: "Previous Page",
       rowsPerPage: "Rows per page:",
-      displayRows: "of",
     },
     menu: {
       search: "Search",
@@ -28,9 +43,9 @@ const defaultOptions: OptionType = {
       filterTable: "Filter Table",
     },
     filter: {
-      title:"Filter Table",
-      add:'Add Filter',
-      delete:'Delete Filter',
+      title: "Filter Table",
+      add: 'Add Filter',
+      delete: 'Delete Filter',
     },
     viewColumns: {
       title: "Show Columns",

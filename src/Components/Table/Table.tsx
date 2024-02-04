@@ -10,7 +10,7 @@ export default function Table() {
   const mainContext = useContext(MainContext);
   const [currentRows, setCurrentRows] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rowPerPage, setRowPerPage] = useState<number>(10);
+  const [rowPerPage, setRowPerPage] = useState<number>(mainContext.options?.rowsPerPage ? mainContext.options?.rowsPerPage : 10);
   const sortedField = useRef({ title: '', kind: true });
 
 
@@ -34,7 +34,7 @@ export default function Table() {
     mainContext.setCountSelectedRows(checked ? selectRow.length : 0);
   }
 
-  const selectRow = (checked: boolean, rowData: any) => {
+  const selectRow = (checked: boolean) => {
     mainContext.setCountSelectedRows(checked ? mainContext.countSelectedRows + 1 : mainContext.countSelectedRows - 1);
   }
 
@@ -52,6 +52,10 @@ export default function Table() {
     mainContext.setShowMenuSubItems({ filter: false, search: false, displayColumns: false });
   }
 
+  const onRowClick = (rowData:any) => {
+    mainContext.options?.onRowClick && mainContext.options?.onRowClick(rowData);
+  }
+
   useEffect(() => {
     pagination();
   }, [currentPage, mainContext.rowData])
@@ -65,12 +69,15 @@ export default function Table() {
       <table id='data-table' className='table' onClick={closeMenuSubItems}>
         <thead>
           <tr className='tr-head'>
-            <th style={{ borderColor: mainContext.options?.color?.borderColor }}>
-              <input type="checkbox" onChange={event => selectAllRows(event.target.checked)} />
-            </th>
+            {
+              !mainContext.options?.selectableRowsHideCheckboxes &&
+              <th style={{ borderColor: mainContext.options?.color?.borderColor }}>
+                <input type="checkbox" onChange={event => selectAllRows(event.target.checked)} />
+              </th>
+            }
             {
               mainContext.columnData.map(header => (
-                <th key={header.field[0].title} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field[0].title)}>
+                <th key={header.field[0].title} className={mainContext.options?.resizableColumns ? 'resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field[0].title)}>
                   <span className='tr-head__header-label' title={header.option?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''}>{header.label}</span>
                   {sortedField.current.title === header.field[0].title && !sortedField.current.kind && <IconButtonArrowDown width={15} />}
                   {sortedField.current.title === header.field[0].title && sortedField.current.kind && <IconButtonArrowUp width={15} />}
@@ -82,10 +89,13 @@ export default function Table() {
         <tbody>
           {
             currentRows.map((data: any) => (
-              <tr key={data.id} className='tr-body'>
-                <td className='tr-body__select-row' style={{ borderColor: mainContext.options?.color?.borderColor }}>
-                  <input type="checkbox" className='td-select-row' onChange={(event) => selectRow(event.target.checked, data)} />
-                </td>
+              <tr key={data.id} className='tr-body' onClick={() => onRowClick(data)}>
+                {
+                  !mainContext.options?.selectableRowsHideCheckboxes &&
+                  <td className='tr-body__select-row' style={{ borderColor: mainContext.options?.color?.borderColor }}>
+                    <input type="checkbox" className='td-select-row' onChange={(event) => selectRow(event.target.checked)} />
+                  </td>
+                }
                 {
                   mainContext.columnData.map((header) => (
                     <td key={header.field[0].title} className='tr-body__data' style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }}>
@@ -105,7 +115,7 @@ export default function Table() {
         mainContext.rowData.length === 0 &&
         <div className="alert-nodata">{mainContext.options?.textLabels?.body?.noMatch}</div>
       }
-      <Pagination pageCount={Math.ceil(mainContext.rowData.length / rowPerPage)} currentPage={currentPage} pageNoHandler={pageNoHandler} previous next first last />
+      {mainContext.options?.pagination && <Pagination pageCount={Math.ceil(mainContext.rowData.length / rowPerPage)} currentPage={currentPage} pageNoHandler={pageNoHandler} previous next first last />}
     </div>
   )
 }

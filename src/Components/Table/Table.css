@@ -12,9 +12,9 @@
     width: 100%;
 }
 
-th {
+.resizable-column {
     resize: horizontal;
-    overflow: auto
+    overflow: auto;
 }
 
 th,
@@ -48,7 +48,7 @@ td {
 
 @media only screen and (max-width: 900px) {
 
-    .tr-head {
+    .tr-head--res {
         display: none;
     }
 

@@ -6,6 +6,7 @@ type FieldColumnType = {
 
 type ColumnOptionType = {
   sort?: boolean,
+  search?: boolean,
   filter?: boolean,
   display?: boolean,
 }
@@ -37,17 +38,11 @@ type ContextType = {
 type ReactDataTableType = {
   direction?: 'rtl' | 'ltr' | 'inherit',
   columns: ColumnType[],
-  allRows: any,
+  rows: any[],
   options?: OptionType,
-  onDeleteRow?: (rows: any[]) => void;
+  // onDeleteRow?: (rows: any[]) => void;
 }
 
-type DataTableType = {
-  // direction?: 'rtl' | 'ltr' | 'inherit',
-  // columns: ColumnType[],
-  // allRows: any,
-  // options?: OptionType,
-}
 
 type OptionType = {
   color?: {
@@ -55,8 +50,24 @@ type OptionType = {
     backgroundColor?: string,
     borderColor?: string,
   },
+  download?: boolean,
+  filter?: boolean,
+  print?: boolean,
+  search?: boolean,
+  viewColumns?: boolean,
+  pagination?: boolean,
+  resizableColumns?: boolean,
+  responsive?: boolean,
+  rowsPerPage?: number,
+  rowsPerPageOptions?: number[],
+  searchPlaceholder?: string,
+  selectableRowsHideCheckboxes?: boolean,
+  cells?: {
+    imageWidth?: number,
+  },
   textLabels?: {
     body?: {
+      title?: string,
       noMatch?: string,
       toolTip?: string,
     },
@@ -66,7 +77,6 @@ type OptionType = {
       next?: string,
       previous?: string,
       rowsPerPage?: string,
-      displayRows?: string,
     },
     menu?: {
       search?: string,
@@ -89,16 +99,8 @@ type OptionType = {
       delete?: string,
     },
   }
-}
-
-type MenuType = {
-  // countSelectedRows: number,
-  // columns: ColumnType[] | undefined,
-  // options?: OptionType,
-  // displayColumn: (checked: boolean, lable: string) => void,
-  // handleSearch: (value: string) => void,
-  // handleDelete: () => void,
-  // handleFilter?: (filters: filterType[]) => void,
+  onRowClick?: (rowData: any) => void,
+  onRowsDelete?: (rowsData: any[]) => void,
 }
 
 type filterType = {
@@ -128,8 +130,10 @@ type ButtonType = {
   classStyle?: 'button-main' | 'button-second' | 'button-text',
 }
 
+type elemEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>
+
 
 export type {
-  DataTableType, ColumnType, MenuType, filterType, PaginationType, ButtonType, OptionType,
-  ContextType, ReactDataTableType
+  ColumnType, filterType, PaginationType, ButtonType, OptionType,
+  ContextType, ReactDataTableType, elemEventType
 }

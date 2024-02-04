@@ -60,7 +60,7 @@ export default function Menu(): React.JSX.Element {
     selectRow.forEach((element, index) => {
       element.checked && selectedRows.push(tempRows.splice(index - selectedRows.length, 1));
     })
-    mainContext.onDeleteRow && mainContext.onDeleteRow(selectedRows);
+    mainContext.options?.onRowsDelete && mainContext.options?.onRowsDelete(selectedRows);
     mainContext.setRowData(tempRows);
     mainContext.setCountSelectedRows(0);
   }
@@ -71,17 +71,19 @@ export default function Menu(): React.JSX.Element {
         mainContext.countSelectedRows === 0
           ?
           <div className='main-block' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
-            <IconButtonShowColumns width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, displayColumns:!mainContext.showMenuSubItems.displayColumns})} title={mainContext.options?.textLabels?.menu?.viewColumns} />
-            <IconButtonFilter width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, filter:!mainContext.showMenuSubItems.filter})} title={mainContext.options?.textLabels?.menu?.filterTable} />
-            <IconButtonDownload width={25} onClick={convertToExcel} title={mainContext.options?.textLabels?.menu?.downloadExcel} />
-            <IconButtonPrint width={25} onClick={printTable} title={mainContext.options?.textLabels?.menu?.print} />
-            <IconButtonSearch width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, search:!mainContext.showMenuSubItems.search})} title={mainContext.options?.textLabels?.menu?.search} />
+            {mainContext.options?.viewColumns && <IconButtonShowColumns width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, displayColumns:!mainContext.showMenuSubItems.displayColumns})} title={mainContext.options?.textLabels?.menu?.viewColumns} />}
+            {mainContext.options?.filter && <IconButtonFilter width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, filter:!mainContext.showMenuSubItems.filter})} title={mainContext.options?.textLabels?.menu?.filterTable} />}
+            {mainContext.options?.download && <IconButtonDownload width={25} onClick={convertToExcel} title={mainContext.options?.textLabels?.menu?.downloadExcel} />}
+            {mainContext.options?.print && <IconButtonPrint width={25} onClick={printTable} title={mainContext.options?.textLabels?.menu?.print} />}
+            {mainContext.options?.search && <IconButtonSearch width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, search:!mainContext.showMenuSubItems.search})} title={mainContext.options?.textLabels?.menu?.search} />}
 
             {mainContext.showMenuSubItems.search && <Search />}
 
             {mainContext.showMenuSubItems.displayColumns && <ShowColumns />}
 
             {mainContext.showMenuSubItems.filter && <Filter />}
+
+            <span className='title-table'>{mainContext.options?.textLabels?.body?.title}</span>
           </div>
           :
           <div className='select-block' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>

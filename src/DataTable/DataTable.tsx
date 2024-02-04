@@ -19,18 +19,17 @@ const MainContext = createContext<ContextType>(
     handleFilter: () => null,
     handleSearch: () => null,
     displayColumn: () => null,
-    onDeleteRow: () => null,
   }
 );
 
-export default function DataTable({ direction = 'rtl', columns, allRows, options, onDeleteRow }: ReactDataTableType) {
-  const [rowData, setRowData] = useState(allRows);
+export default function DataTable({ direction = 'ltr', columns, rows, options }: ReactDataTableType) {
+  const [rowData, setRowData] = useState(rows);
   const [columnData, setColumnData] = useState<ColumnType[]>(columns);
   const [showMenuSubItems, setShowMenuSubItems] = useState({ filter: false, search: false, displayColumns: false });
   const [countSelectedRows, setCountSelectedRows] = useState<number>(0);
 
   const handleFilter = (listFilter: filterType[]) => {
-    let tempRows = [...allRows];
+    let tempRows = [...rows];
     listFilter.map(filter => {
       switch (filter.condition.value) {
         case 'Equal':
@@ -55,7 +54,7 @@ export default function DataTable({ direction = 'rtl', columns, allRows, options
 
   const handleSearch = (value: string) => {
     if (value === '') {
-      setRowData(allRows);
+      setRowData(rows);
       return;
     }
 
@@ -101,7 +100,6 @@ export default function DataTable({ direction = 'rtl', columns, allRows, options
         handleFilter,
         handleSearch,
         displayColumn,
-        onDeleteRow,
       }}>
         <div id='div-datatable' dir={direction} >
           <Menu />

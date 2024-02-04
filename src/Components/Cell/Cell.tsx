@@ -1,11 +1,37 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 import { MainContext } from '../../DataTable/DataTable';
-import { ColumnType } from "../../Type/Type";
+import { ColumnType, elemEventType } from "../../Type/Type";
 import './Cell.css';
+
+
 
 export default function Cell({ column, row }: { column: ColumnType, row: any }) {
   const mainContext = useContext(MainContext);
+  const [cellValue, setCellValue] = useState<string>('');
+
+  const onChangeInput = (event: elemEventType, eventFunction?: (event:elemEventType) => void) => {
+    setCellValue(event.target.value);
+    eventFunction && eventFunction(event);
+  }
+
+  useEffect(() => {
+    switch (column.kind) {
+      case 'input/textbox':
+      case 'input/date':
+      case 'input/datetime-local':
+      case 'input/number':
+      case 'input/file':
+      case 'input/password':
+      case 'textarea':
+        setCellValue(row[column.field[0].title]);
+        break;
+      case 'select':
+        setCellValue(row[column.field[0].title]?.value ? row[column.field[0].title].value : '');
+        break;
+    }
+
+  }, [])
 
   switch (column.kind) {
     case 'text':
@@ -25,18 +51,14 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
     case 'input/password':
       return (
         <>
-          {column.field.map((field) => (
-            <input key={field.title} value={row[field.title]} onChange={(event) => field.eventHandlerRow && field.eventHandlerRow(event)} type={column.kind.split('/')[1]} />
-          ))}
+          <input key={column.field[0].title} value={cellValue} onChange={(event) => onChangeInput(event, column.field[0].eventHandlerRow)} type={column.kind.split('/')[1]} />
         </>
       )
 
     case 'textarea':
       return (
         <>
-          {column.field.map((field) => (
-            <textarea key={field.title} onChange={(event) => field.eventHandlerRow && field.eventHandlerRow(event)} />
-          ))}
+          <textarea key={column.field[0].title} value={cellValue} onChange={(event) => onChangeInput(event, column.field[0].eventHandlerRow)} />
         </>
       )
 
@@ -44,7 +66,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {column.field.map((field) => (
-            <img key={field.title} src={row[field.title]} width={70} />
+            <img key={field.title} src={row[field.title]} width={mainContext.options?.cells?.imageWidth} />
           ))}
         </>
       )
@@ -81,12 +103,13 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {column.field.map((field) => (
-            <select key={field.title} className="select-field" onChange={(event) => field.eventHandlerRow && field.eventHandlerRow(event)}
+            row[field.title] && row[field.title].options.includes(row[field.title].value) &&
+            <select key={field.title} value={cellValue} className="select-field" onChange={(event) => onChangeInput(event, column.field[0].eventHandlerRow)}
               style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}
             >
               {
-                Array.isArray(row[field.title]) &&
-                row[field.title].map((value: any) => (
+                Array.isArray(row[field.title].options) &&
+                row[field.title].options.map((value: any) => (
                   <option key={value} className="select-field__option" value={value}>{value}</option>
                 ))
               }
