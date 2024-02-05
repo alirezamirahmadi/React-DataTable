@@ -1,4 +1,4 @@
-.search {
+.rdtsearch {
   display: inline;
   position: absolute;
   top: 7px;
@@ -8,7 +8,7 @@
   height: 25px;
 }
 
-.search__input {
+.rdtsearch__input {
   border: none;
   outline: none;
   height: 15px;
@@ -17,7 +17,7 @@
   border-color: inherit;
 }
 
-.search__close {
+.rdtsearch__close {
   color: inherit;
   background-color: inherit;
   border-color: inherit;

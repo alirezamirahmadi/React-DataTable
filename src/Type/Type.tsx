@@ -1,3 +1,4 @@
+import React from "react"
 
 type FieldColumnType = {
   title: string,
@@ -12,10 +13,11 @@ type ColumnOptionType = {
 }
 
 type ColumnType = {
-  field: FieldColumnType[],
+  field: FieldColumnType,
   label: string,
-  kind: 'text' | 'input/textbox' | 'input/date' | 'input/datetime-local' | 'input/number' | 'input/file' | 'input/password' | 'textarea' | 'button' | 'image' | 'boolean' | 'select' | 'progress',
+  kind?: 'input/textbox' | 'input/date' | 'input/datetime-local' | 'input/number' | 'input/file' | 'input/password' | 'textarea' | 'button' | 'image' | 'boolean' | 'select' | 'progress' | 'component',
   option?: ColumnOptionType,
+  component?: (value:any, updateValue:(event:any)=>void) => React.JSX.Element,
   eventHandlerHeader?: (value: any) => void,
 }
 
@@ -113,7 +115,6 @@ type PaginationType = {
   pageCount: number,
   currentPage: number,
   pageNoHandler: (pageNo: number, rowPerPAge: number) => void,
-  justifyContent?: string,
   next?: boolean,
   previous?: boolean,
   first?: boolean,
@@ -134,6 +135,6 @@ type elemEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTM
 
 
 export type {
-  ColumnType, filterType, PaginationType, ButtonType, OptionType,
+  ColumnType, FieldColumnType, filterType, PaginationType, ButtonType, OptionType,
   ContextType, ReactDataTableType, elemEventType
 }

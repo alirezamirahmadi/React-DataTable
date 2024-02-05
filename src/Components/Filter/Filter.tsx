@@ -8,7 +8,6 @@ import './Filter.css'
 
 export default function Filter(): React.JSX.Element {
   const mainContext = useContext(MainContext);
-  const [options, setOptions] = useState(mainContext.options);
   const [filterColumn, setFilterColumn] = useState('');
   const [listFilter, setListFilter] = useState<filterType[]>([]);
   const [filterCondition, setFilterCondition] = useState('');
@@ -47,36 +46,36 @@ export default function Filter(): React.JSX.Element {
 
   return (
     <>
-      <div className="filter" >
-        <div className="filter__title">
-          <span>{options?.textLabels?.filter?.title}</span>
+      <div className="rdtfilter" >
+        <div className="rdtfilter__title">
+          <span>{mainContext.options?.textLabels?.filter?.title}</span>
           <IconButtonClose width={15} onClick={() => mainContext.setShowMenuSubItems({ ...mainContext.showMenuSubItems, filter: false })} />
         </div>
-        <div className="filter-item" style={{ color: options?.color?.color, backgroundColor: options?.color?.backgroundColor, borderColor: options?.color?.borderColor }}>
-          <select ref={slFilterColumn} className='filter-item__column' value={filterColumn} onChange={event => setFilterColumn(event.target.value)} >
+        <div className="rdtfilter-item" style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+          <select ref={slFilterColumn} className='rdtfilter-column' value={filterColumn} onChange={event => setFilterColumn(event.target.value)} >
             <option value='-1'>---</option>
             {
               mainContext.columnData.map(column => (
-                <option key={column.label} value={column.field[0].title}>{column.label}</option>
+                <option key={column.label} className='rdtfilter-column__option' value={column.field.title}>{column.label}</option>
               ))
             }
           </select>
-          <select ref={slFilterCondition} className='filter-item__condition' value={filterCondition} onChange={event => setFilterCondition(event.target.value)} >
-            <option value='-1'>---</option>
-            <option value="Equal">Equal</option>
-            <option value="NotEqual">Not Equal</option>
-            <option value="Include">Include</option>
-            <option value="DontInclude">Don't Include</option>
+          <select ref={slFilterCondition} className='rdtfilter-condition' value={filterCondition} onChange={event => setFilterCondition(event.target.value)} >
+            <option className='rdtfilter-condition__option' value='-1'>---</option>
+            <option className='rdtfilter-condition__option' value="Equal">Equal</option>
+            <option className='rdtfilter-condition__option' value="NotEqual">Not Equal</option>
+            <option className='rdtfilter-condition__option' value="Include">Include</option>
+            <option className='rdtfilter-condition__option' value="DontInclude">Don't Include</option>
           </select>
-          <input className='filter-item__text' type="text" value={filterText} onChange={event => setFilterText(event.target.value)} />
-          <IconButtonAdd width={20} title={options?.textLabels?.filter?.add} onClick={addFilter} />
+          <input className='rdtfilter-item__text' type="text" value={filterText} onChange={event => setFilterText(event.target.value)} />
+          <IconButtonAdd width={20} title={mainContext.options?.textLabels?.filter?.add} onClick={addFilter} />
         </div>
-        <ul className='filter-list' style={{ color: options?.color?.color, backgroundColor: options?.color?.backgroundColor, borderColor: options?.color?.borderColor }}>
+        <ul className='rdtfilter-list' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
           {
             listFilter.map(filter => (
-              <li key={filter.column.value} className='filter-list__li'>
+              <li key={filter.column.value} className='rdtfilter-list__li'>
                 <span>{filter.column.label} - {filter.condition.label} - {filter.text}</span>
-                <IconButtonClose width={15} title={options?.textLabels?.filter?.delete} onClick={() => removeFilter(filter.column.value)} />
+                <IconButtonClose width={15} title={mainContext.options?.textLabels?.filter?.delete} onClick={() => removeFilter(filter.column.value)} />
               </li>
             ))
           }

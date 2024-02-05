@@ -63,7 +63,7 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     rowData.map((data: any) => {
       includeValue = false;
       columns.map(column => {
-        if ((data[column.field[0].title] + '').toString().includes(value) && column.option?.display != false) includeValue = true;
+        if ((data[column.field.title] + '').toString().includes(value) && column.option?.display != false) includeValue = true;
       })
       includeValue && tempRow.push(data);
     })

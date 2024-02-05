@@ -70,7 +70,7 @@ export default function Menu(): React.JSX.Element {
       {
         mainContext.countSelectedRows === 0
           ?
-          <div className='main-block' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+          <div className='rdtmenu-main' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
             {mainContext.options?.viewColumns && <IconButtonShowColumns width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, displayColumns:!mainContext.showMenuSubItems.displayColumns})} title={mainContext.options?.textLabels?.menu?.viewColumns} />}
             {mainContext.options?.filter && <IconButtonFilter width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, filter:!mainContext.showMenuSubItems.filter})} title={mainContext.options?.textLabels?.menu?.filterTable} />}
             {mainContext.options?.download && <IconButtonDownload width={25} onClick={convertToExcel} title={mainContext.options?.textLabels?.menu?.downloadExcel} />}
@@ -83,10 +83,10 @@ export default function Menu(): React.JSX.Element {
 
             {mainContext.showMenuSubItems.filter && <Filter />}
 
-            <span className='title-table'>{mainContext.options?.textLabels?.body?.title}</span>
+            <span className='rdtmenu-title'>{mainContext.options?.textLabels?.body?.title}</span>
           </div>
           :
-          <div className='select-block' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+          <div className='rdtmenu-select' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
             <IconButtonDelete width={25} onClick={handleDelete} title={mainContext.options?.textLabels?.selectedRows?.delete} />
             <p>{mainContext.countSelectedRows} {mainContext.options?.textLabels?.selectedRows?.text}</p>
           </div>

@@ -1,19 +1,14 @@
-.pagination{
+.rdtpagination{
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
 }
-.pages--center{
-    justify-content: center;
-}
-.pages--right{
-    justify-content: right;
-}
-.pages--left{
-    justify-content: left;
+
+.rdtpagination-pages{
+    padding: 2px;
 }
 
-.pages__no{
+.rdtpagination-pages__no{
     border: none;
     cursor: pointer;
     color: inherit;
@@ -22,7 +17,7 @@
     margin: 0 1px;
 }
 
-.per-page{
+.rdtpagination-per-page{
     height: 23px;
     border-radius: 5px;
     padding: 0 4px;

@@ -7,7 +7,6 @@ import './Search.css';
 
 export default function Search(): React.JSX.Element {
   const mainContext = useContext(MainContext);
-  const [options, setOptions] = useState(mainContext.options);
   const [searchValue, setSearchValue] = useState('');
   const txtSearch = useRef<HTMLInputElement>(null);
 
@@ -23,9 +22,9 @@ export default function Search(): React.JSX.Element {
 
   return (
     <>
-      <div className='search' style={{ color: options?.color?.color, backgroundColor: options?.color?.backgroundColor, borderColor: options?.color?.borderColor }}>
-        <input type='text' ref={txtSearch} className='search__input' value={searchValue} onChange={(event) => searchTable(event.target.value)} placeholder={mainContext.options?.searchPlaceholder} />
-        <button className='search__close' >
+      <div className='rdtsearch' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+        <input type='text' ref={txtSearch} className='rdtsearch__input' value={searchValue} onChange={(event) => searchTable(event.target.value)} placeholder={mainContext.options?.searchPlaceholder} />
+        <button className='rdtsearch__close' >
           <IconButtonClose width={18} onClick={() => searchTable('')} />
         </button>
       </div>

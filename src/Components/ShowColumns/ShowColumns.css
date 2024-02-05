@@ -1,5 +1,5 @@
 
-.show-column {
+.rdtshowcolumn {
   list-style: none;
   position: absolute;
   inset-inline-start: 5px;
@@ -13,8 +13,15 @@
   border-color: inherit;
 }
 
-.show-column__title{
+.rdtshowcolumn__title{
   display: flex;
   gap: 10px;
 }
 
+.rdtshowcolumn__li{
+  padding: 2px;
+}
+
+.rdtshowcolumn__label{
+  padding: 2px;
+}

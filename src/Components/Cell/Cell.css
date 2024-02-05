@@ -1,20 +1,42 @@
-.progress-field{
-  height: 30px;
-  margin: 2px;
-}
-
-.select-field{
+.rdtcell-input{
   border-radius: 4px;
   padding: 3px 5px;
 }
 
-.select-field__option{
+.rdtcell-textarea{
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+
+.rdtcell-image{
+  padding: 3px 5px;
+}
+
+.rdtcell-checkbox{
+  padding: 3px 5px;
+}
+
+.rdtcell-text{
+  padding: 3px 5px;
+}
+
+.rdtcell-progress{
+  height: 30px;
+  margin: 2px;
+}
+
+.rdtcell-select{
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+
+.rdtcell-select__option{
   color:inherit;
   background-color: inherit;
   border-color: inherit;
 }
 
-.button-field{
+.rdtcell-button{
   color:inherit;
   background-color: inherit;
   border-color: inherit;

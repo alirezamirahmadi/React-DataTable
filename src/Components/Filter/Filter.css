@@ -1,4 +1,4 @@
-.filter {
+.rdtfilter {
   border: 1px solid;
   border-radius: 5px;
   position: absolute;
@@ -8,19 +8,19 @@
   border-color: inherit;
 }
 
-.filter__title{
+.rdtfilter__title{
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.filter-item {
+.rdtfilter-item {
   display: flex;
   justify-items: center;
   margin-top: 5px;
 }
 
-.filter-item__column {
+.rdtfilter-column {
   margin: 0 3px;
   height: 28px;
   color: inherit;
@@ -29,7 +29,11 @@
   border-radius: 5px;
 }
 
-.filter-item__condition {
+.rdtfilter-column__option{
+  padding: 2px;
+}
+
+.rdtfilter-condition {
   margin: 0 3px;
   height: 28px;
   color: inherit;
@@ -38,7 +42,11 @@
   border-radius: 5px;
 }
 
-.filter-item__text {
+.rdtfilter-condition__option{
+  padding: 2px;
+}
+
+.rdtfilter-item__text {
   margin: 0 3px;
   height: 22px;
   color: inherit;
@@ -47,17 +55,17 @@
   border-radius: 5px;
 }
 
-.filter__add {
+.rdtfilter__add {
   cursor: pointer;
 }
 
-.filter-list {
+.rdtfilter-list {
   list-style: none;
   margin: 0;
   padding: 0 10px;
 }
 
-.filter-list__li {
+.rdtfilter-list__li {
   display: flex;
   justify-content: space-between;
   justify-items: center;
@@ -69,7 +77,7 @@
   border-color: inherit;
 }
 
-.filter-list__remove {
+.rdtfilter-list__remove {
   cursor: pointer;
   color: inherit;
   background-color: inherit;

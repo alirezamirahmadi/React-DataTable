@@ -7,18 +7,28 @@ import Example from '../examples/Example-img/ExampleImg'
 const editProduct = (value: any) => {
   console.log(value);
 }
+const TestC = ():React.JSX.Element=> {
+  return(
+    <>
+    <input type="text" />
+    <input type="text" />
+    <button>click</button>
+    </>
+  )
+}
 const tableHeader: ColumnType[] = [
-  { field: [{ title: 'id' }], label: 'ID', kind: 'text' },
-  { field: [{ title: 'image' }], label: 'Image', kind: 'image' },
-  { field: [{ title: 'pname' }], label: 'Name', kind: 'text' },
-  { field: [{ title: 'section' }], label: 'Section', kind: 'text' },
-  { field: [{ title: 'price' }], label: 'Price', kind: 'text', option: { sort: true } },
-  { field: [{ title: 'stock' }], label: 'Stock', kind: 'text' },
-  { field: [{ title: 'cites' }], label: 'Cites', kind: 'select' },
-  { field: [{ title: 'active' }], label: 'Active', kind: 'boolean' },
-  { field: [{ title: 'progress' }], label: 'Progress', kind: 'progress' },
-  { field: [{ title: 'desc' }], label: 'Description', kind: 'input/datetime-local' },
-  { field: [{ title: 'click me!', eventHandlerRow: editProduct }], label: 'Modify', kind: 'button' },
+  { field: { title: 'id' }, label: 'ID', },
+  { field: { title: 'image' }, label: 'Image', kind: 'image' },
+  { field: { title: 'pname' }, label: 'Name', },
+  { field: { title: 'section' }, label: 'Section', },
+  { field: { title: 'price' }, label: 'Price', option: { sort: true } },
+  { field: { title: 'stock' }, label: 'Stock', },
+  { field: { title: 'cites' }, label: 'Cites', kind: 'select' },
+  { field: { title: 'active' }, label: 'Active', kind: 'boolean' },
+  { field: { title: 'progress' }, label: 'Progress', kind: 'progress' },
+  { field: { title: 'desc' }, label: 'Description', kind: 'input/datetime-local' },
+  // { field: <TestC />, label: 'Component', kind: 'component'},
+  { field: { title: 'click me!', eventHandlerRow: editProduct }, label: 'Modify', kind: 'button' },
 ]
 let products = [
   { id: 1, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5, cites: { value: 2, options: [1, 2, 3] }, desc: '2024-02-05 12:55' },
@@ -45,10 +55,11 @@ function App() {
 
   return (
     <>
-      <Example />
-      <DataTable direction='ltr' columns={tableHeader} rows={products} options={{selectableRowsHideCheckboxes:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} />
+      {/* <Example /> */}
+      <DataTable direction='ltr' columns={tableHeader} rows={products} options={{responsive:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} />
     </>
   )
 }
+
 
 export default App

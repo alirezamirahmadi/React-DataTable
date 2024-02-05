@@ -27,7 +27,7 @@ export default function Table() {
   }
 
   const selectAllRows = (checked: boolean) => {
-    let selectRow = (document.querySelectorAll('.td-select-row') as NodeListOf<HTMLInputElement>);
+    let selectRow = (document.querySelectorAll('.rdttable-row__select-cell') as NodeListOf<HTMLInputElement>);
     selectRow.forEach(element => {
       element.checked = checked;
     })
@@ -52,7 +52,7 @@ export default function Table() {
     mainContext.setShowMenuSubItems({ filter: false, search: false, displayColumns: false });
   }
 
-  const onRowClick = (rowData:any) => {
+  const onRowClick = (rowData: any) => {
     mainContext.options?.onRowClick && mainContext.options?.onRowClick(rowData);
   }
 
@@ -66,9 +66,9 @@ export default function Table() {
 
   return (
     <div id='div-table' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
-      <table id='data-table' className='table' onClick={closeMenuSubItems}>
+      <table id='data-table' className='rdttable' onClick={closeMenuSubItems}>
         <thead>
-          <tr className='tr-head'>
+          <tr className={mainContext.options?.responsive ? 'rdttable-header--res' : ''}>
             {
               !mainContext.options?.selectableRowsHideCheckboxes &&
               <th style={{ borderColor: mainContext.options?.color?.borderColor }}>
@@ -77,10 +77,10 @@ export default function Table() {
             }
             {
               mainContext.columnData.map(header => (
-                <th key={header.field[0].title} className={mainContext.options?.resizableColumns ? 'resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field[0].title)}>
-                  <span className='tr-head__header-label' title={header.option?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''}>{header.label}</span>
-                  {sortedField.current.title === header.field[0].title && !sortedField.current.kind && <IconButtonArrowDown width={15} />}
-                  {sortedField.current.title === header.field[0].title && sortedField.current.kind && <IconButtonArrowUp width={15} />}
+                <th key={header.field.title} className={mainContext.options?.resizableColumns ? 'rdttable-resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field.title)}>
+                  <span className='rdttable-header__label' title={header.option?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''}>{header.label}</span>
+                  {sortedField.current.title === header.field.title && !sortedField.current.kind && <IconButtonArrowDown width={15} />}
+                  {sortedField.current.title === header.field.title && sortedField.current.kind && <IconButtonArrowUp width={15} />}
                 </th>
               ))
             }
@@ -89,18 +89,18 @@ export default function Table() {
         <tbody>
           {
             currentRows.map((data: any) => (
-              <tr key={data.id} className='tr-body' onClick={() => onRowClick(data)}>
+              <tr key={data.id} className={mainContext.options?.responsive ? 'rdttable-row--res' : ''} onClick={() => onRowClick(data)}>
                 {
                   !mainContext.options?.selectableRowsHideCheckboxes &&
-                  <td className='tr-body__select-row' style={{ borderColor: mainContext.options?.color?.borderColor }}>
-                    <input type="checkbox" className='td-select-row' onChange={(event) => selectRow(event.target.checked)} />
+                  <td className={mainContext.options?.responsive ? 'rdttable-row__select--res' : 'rdttable-row__select'} style={{ borderColor: mainContext.options?.color?.borderColor }}>
+                    <input type="checkbox" className='rdttable-row__select-cell' onChange={(event) => selectRow(event.target.checked)} />
                   </td>
                 }
                 {
                   mainContext.columnData.map((header) => (
-                    <td key={header.field[0].title} className='tr-body__data' style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }}>
-                      <div className="cell-data">
-                        <span className='cell-data__label'>{header.label}</span>
+                    <td key={header.field.title} className={mainContext.options?.responsive ? 'rdttable-row__data--res' : 'rdttable-row__data'} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }}>
+                      <div className={mainContext.options?.responsive ? 'rdttable-row__data-cell--res' : 'rdttable-row__data-cell'}>
+                        <span className={mainContext.options?.responsive ? 'rdttable-row__data-label--res' : 'rdttable-row__data-label'}>{header.label}</span>
                         <Cell column={header} row={data} />
                       </div>
                     </td>
@@ -113,7 +113,7 @@ export default function Table() {
       </table>
       {
         mainContext.rowData.length === 0 &&
-        <div className="alert-nodata">{mainContext.options?.textLabels?.body?.noMatch}</div>
+        <div className="rdttable-nodata">{mainContext.options?.textLabels?.body?.noMatch}</div>
       }
       {mainContext.options?.pagination && <Pagination pageCount={Math.ceil(mainContext.rowData.length / rowPerPage)} currentPage={currentPage} pageNoHandler={pageNoHandler} previous next first last />}
     </div>
