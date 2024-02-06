@@ -12,6 +12,6 @@ const columns: ColumnType[] = [
 
 export default function Example(): React.JSX.Element {
   return (
-    <DataTable direction='ltr' rows={ProductsData} columns={columns} />
+    <DataTable rows={ProductsData} columns={columns} />
   )
 }

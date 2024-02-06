@@ -37,12 +37,11 @@ type ContextType = {
   onDeleteRow?: (rows: any[]) => void;
 }
 
-type ReactDataTableType = {
+type DataTableType = {
   direction?: 'rtl' | 'ltr' | 'inherit',
   columns: ColumnType[],
   rows: any[],
   options?: OptionType,
-  // onDeleteRow?: (rows: any[]) => void;
 }
 
 
@@ -136,5 +135,5 @@ type elemEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTM
 
 export type {
   ColumnType, FieldColumnType, filterType, PaginationType, ButtonType, OptionType,
-  ContextType, ReactDataTableType, elemEventType
+  ContextType, DataTableType, elemEventType
 }
