@@ -63,7 +63,7 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     rowData.map((data: any) => {
       includeValue = false;
       columns.map(column => {
-        if ((data[column.field.title] + '').toString().includes(value) && column.option?.display != false) includeValue = true;
+        if (column.options?.search != false && column.options?.display != false && (data[column.field.title] + '').toString().toLowerCase().includes(value.toLowerCase())) includeValue = true;
       })
       includeValue && tempRow.push(data);
     })
@@ -74,11 +74,11 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     let tempColumn = [...columnData];
     tempColumn.map(column => {
       if (column.label === label) {
-        if (column.option) {
-          column.option.display = checked;
+        if (column.options) {
+          column.options.display = checked;
         }
         else {
-          column.option = { display: checked }
+          column.options = { display: checked }
         }
       }
     })

@@ -18,8 +18,8 @@ export default function ShowColumns(): React.JSX.Element {
         {
           mainContext.columnData.map(header => (
             <li key={header.label} className='rdtshowcolumn__li' title={mainContext.options?.textLabels?.viewColumns?.titleItem}>
-              <input id="display-column" type="checkbox" checked={header.option?.display === false ? false : true} onChange={(event) => mainContext.displayColumn(event.target.checked, header.label)} />
-              <label htmlFor="display-column" className='rdtshowcolumn__label'>{header.label}</label>
+              <input id="display-column" type="checkbox" checked={header.options?.display === false ? false : true} onChange={(event) => mainContext.displayColumn(event.target.checked, header.label)} />
+              <label htmlFor="display-column" className='rdtshowcolumn__label' >{header.label}</label>
             </li>
           ))
         }

@@ -10,14 +10,14 @@ type ColumnOptionType = {
   search?: boolean,
   filter?: boolean,
   display?: boolean,
+  component?: (value:any, updateValue:(event:any)=>void, rowData:any) => React.JSX.Element,
 }
 
 type ColumnType = {
   field: FieldColumnType,
   label: string,
   kind?: 'input/textbox' | 'input/date' | 'input/datetime-local' | 'input/number' | 'input/file' | 'input/password' | 'textarea' | 'button' | 'image' | 'boolean' | 'select' | 'progress' | 'component',
-  option?: ColumnOptionType,
-  component?: (value:any, updateValue:(event:any)=>void) => React.JSX.Element,
+  options?: ColumnOptionType,
   eventHandlerHeader?: (value: any) => void,
 }
 

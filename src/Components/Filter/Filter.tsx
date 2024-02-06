@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect, useContext } from 'react'
 
 import { MainContext } from '../../DataTable/DataTable';
-import { filterType } from '../../Type/Type'
+import { filterType, ColumnType } from '../../Type/Type'
 import { IconButtonAdd, IconButtonClose } from '../IconButton/IconButton';
 import './Filter.css'
 
@@ -55,9 +55,12 @@ export default function Filter(): React.JSX.Element {
           <select ref={slFilterColumn} className='rdtfilter-column' value={filterColumn} onChange={event => setFilterColumn(event.target.value)} >
             <option value='-1'>---</option>
             {
-              mainContext.columnData.map(column => (
-                <option key={column.label} className='rdtfilter-column__option' value={column.field.title}>{column.label}</option>
-              ))
+              mainContext.columnData.map((column: ColumnType) => {
+                if (column.options?.filter != false) {
+                  return <option key={column.label} className='rdtfilter-column__option' value={column.field.title}>{column.label}</option>
+                }
+              }
+              )
             }
           </select>
           <select ref={slFilterCondition} className='rdtfilter-condition' value={filterCondition} onChange={event => setFilterCondition(event.target.value)} >

@@ -10,6 +10,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
   const mainContext = useContext(MainContext);
   const [cellValue, setCellValue] = useState<any>('');
   const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
+  const [componentValue, setComponentValue] = useState<any>('');
 
   const onChangeInput = (event: elemEventType, eventFunction?: (event: elemEventType) => void) => {
     setCellValue(event.target.value);
@@ -18,6 +19,9 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>, eventFunction?: (event: elemEventType) => void) => {
     setCheckboxValue(event.target.checked);
     eventFunction && eventFunction(event);
+  }
+  const onChangeComponent = (value: any) => {
+    setComponentValue(value);
   }
 
   useEffect(() => {
@@ -32,7 +36,13 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
         setCellValue(row[column.field.title]);
         break;
       case 'select':
-        setCellValue(row[column.field.title]?.value ? row[column.field.title].value : '');
+        setCellValue(row[column.field.title]?.index && row[column.field.title]?.options && row[column.field.title]?.index < row[column.field.title]?.options.length  ? row[column.field.title].options[row[column.field.title]?.index] : row[column.field.title]?.options[0]);
+        break;
+      case 'boolean':
+        setCheckboxValue(row[column.field.title] ? row[column.field.title] : false);
+        break;
+      case 'component':
+        setComponentValue(row[column.field.title]);
         break;
     }
 
@@ -94,7 +104,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       return (
         <>
           {
-            row[column.field.title] && row[column.field.title].options.includes(row[column.field.title].value) &&
+            row[column.field.title] &&
             <select value={cellValue} className="rdtcell-select" onChange={(event) => onChangeInput(event, column.field.eventHandlerRow)}
               style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}
             >
@@ -111,7 +121,8 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
     case 'component':
       return (
         <>
-          {column.component && column.component(row[column.field.title], column.field?.eventHandlerRow ? column.field?.eventHandlerRow : () => { })}
+          {/* {column.options?.component && column.options?.component(row[column.field.title], column.field?.eventHandlerRow ? column.field?.eventHandlerRow : () => { }, row)} */}
+          {column.options?.component && column.options?.component(componentValue, (value) => onChangeComponent(value), row)}
         </>
       )
     default:

@@ -2,26 +2,24 @@
 import DataTable from './DataTable/DataTable';
 import { ColumnType } from './Type/Type';
 
-import Example from '../examples/Example-img/ExampleImg'
+import Example from '../examples/Example-Options/ExampleOptions'
+// import Example from '../examples/Example-Column-Options/ExampleColumnOptions'
+// import Example from '../examples/Simple/Simple'
+// import Example from '../examples/Example-Select-Progress/ExampleSelectProgress'
+// import Example from '../examples/Example-Inputs/ExampleInputs'
+// import Example from '../examples/Example-Button/ExampleButton'
+// import Example from '../examples/Example-Component/ExampleComponent'
 
 const editProduct = (value: any) => {
   console.log(value);
 }
-const TestC = ():React.JSX.Element=> {
-  return(
-    <>
-    <input type="text" />
-    <input type="text" />
-    <button>click</button>
-    </>
-  )
-}
+
 const tableHeader: ColumnType[] = [
   { field: { title: 'id' }, label: 'ID', },
   { field: { title: 'image' }, label: 'Image', kind: 'image' },
   { field: { title: 'pname' }, label: 'Name', },
   { field: { title: 'section' }, label: 'Section', },
-  { field: { title: 'price' }, label: 'Price', option: { sort: true } },
+  { field: { title: 'price' }, label: 'Price', options: { sort: true } },
   { field: { title: 'stock' }, label: 'Stock', },
   { field: { title: 'cites' }, label: 'Cites', kind: 'select' },
   { field: { title: 'active' }, label: 'Active', kind: 'boolean' },
@@ -31,8 +29,8 @@ const tableHeader: ColumnType[] = [
   { field: { title: 'click me!', eventHandlerRow: editProduct }, label: 'Modify', kind: 'button' },
 ]
 let products = [
-  { id: 1, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5, cites: { value: 2, options: [1, 2, 3] }, desc: '2024-02-05 12:55' },
-  { id: 2, section: 'Phone', pname: 'Redmi Note 10', image: 'logo192.png', price: '160', stock: 12, cites: { value: 'alireza', options: ['anna', 'lena', 'alireza'] } },
+  { id: 1, section: 'Phone', pname: 'Redmi 9', image: 'logo192.png', price: '120', stock: 5, cites: { index: 1, options: [1, 2, 3] }, desc: '2024-02-05 12:55' },
+  { id: 2, section: 'Phone', pname: 'Redmi Note 10', image: 'logo192.png', price: '160', stock: 12, cites: { index: 2, options: ['anna', 'lena', 'alireza'] } },
   { id: 3, section: 'Laptop', pname: 'Asus A10', image: 'logo192.png', price: '320', stock: 52, },
   { id: 4, section: 'Laptop', pname: 'hp RE4', image: 'logo192.png', price: '400', stock: 15, progress: ['20', 'o'] },
   { id: 5, section: 'Monitor', pname: 'Samsung 22', image: 'logo192.png', price: '170', stock: 67, progress: [200, 500] },
@@ -55,8 +53,8 @@ function App() {
 
   return (
     <>
-      {/* <Example /> */}
-      <DataTable direction='ltr' columns={tableHeader} rows={products} options={{responsive:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} />
+      <Example />
+      {/* <DataTable direction='ltr' columns={tableHeader} rows={products} options={{responsive:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} /> */}
     </>
   )
 }

@@ -77,8 +77,8 @@ export default function Table() {
             }
             {
               mainContext.columnData.map(header => (
-                <th key={header.field.title} className={mainContext.options?.resizableColumns ? 'rdttable-resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }} onClick={() => header.option?.sort && sortData(header.field.title)}>
-                  <span className='rdttable-header__label' title={header.option?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''}>{header.label}</span>
+                <th key={header.field.title} className={mainContext.options?.resizableColumns ? 'rdttable-resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.options?.display === false ? 'none' : 'table-cell' }} onClick={() => header.options?.sort && sortData(header.field.title)}>
+                  <span className={header.options?.sort ? 'rdttable-header__label' : ''} title={header.options?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''}>{header.label}</span>
                   {sortedField.current.title === header.field.title && !sortedField.current.kind && <IconButtonArrowDown width={15} />}
                   {sortedField.current.title === header.field.title && sortedField.current.kind && <IconButtonArrowUp width={15} />}
                 </th>
@@ -98,7 +98,7 @@ export default function Table() {
                 }
                 {
                   mainContext.columnData.map((header) => (
-                    <td key={header.field.title} className={mainContext.options?.responsive ? 'rdttable-row__data--res' : 'rdttable-row__data'} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.option?.display === false ? 'none' : 'table-cell' }}>
+                    <td key={header.field.title} className={mainContext.options?.responsive ? 'rdttable-row__data--res' : 'rdttable-row__data'} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.options?.display === false ? 'none' : 'table-cell' }}>
                       <div className={mainContext.options?.responsive ? 'rdttable-row__data-cell--res' : 'rdttable-row__data-cell'}>
                         <span className={mainContext.options?.responsive ? 'rdttable-row__data-label--res' : 'rdttable-row__data-label'}>{header.label}</span>
                         <Cell column={header} row={data} />

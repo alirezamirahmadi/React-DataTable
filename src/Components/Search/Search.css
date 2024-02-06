@@ -2,7 +2,7 @@
   display: inline;
   position: absolute;
   top: 7px;
-  border: 2px solid var(--text-color);
+  border: 2px solid;
   border-radius: 7px;
   padding: 0 2px;
   height: 25px;
