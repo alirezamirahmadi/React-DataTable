@@ -1,5 +1,5 @@
 import React from 'react';
-import DataTable from '../../src/DataTable/DataTable';
+import DataTable from '../../src/ReactDataTable/ReactDataTable';
 import { ProductsData } from '../ExampleData/ExampleData';
 import { ColumnType } from '../../src/Type/Type';
 

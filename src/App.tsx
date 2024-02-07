@@ -1,5 +1,5 @@
 
-import DataTable from './DataTable/DataTable';
+import DataTable from './ReactDataTable/ReactDataTable';
 import { ColumnType } from './Type/Type';
 
 import Example from '../examples/Example-Options/ExampleOptions'
