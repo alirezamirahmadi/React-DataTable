@@ -14,6 +14,7 @@ export default function Filter(): React.JSX.Element {
   const [filterText, setFilterText] = useState('');
   const slFilterColumn = useRef<HTMLSelectElement>(null);
   const slFilterCondition = useRef<HTMLSelectElement>(null);
+  const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
 
   const addFilter = () => {
     if (filterColumn === '-1' || filterCondition === '-1' || filterText === '' ||
@@ -51,7 +52,7 @@ export default function Filter(): React.JSX.Element {
           <span>{mainContext.options?.textLabels?.filter?.title}</span>
           <IconButtonClose width={15} onClick={() => mainContext.setShowMenuSubItems({ ...mainContext.showMenuSubItems, filter: false })} />
         </div>
-        <div className="rdtfilter-item" style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+        <div className="rdtfilter-item" style={style}>
           <select ref={slFilterColumn} className='rdtfilter-column' value={filterColumn} onChange={event => setFilterColumn(event.target.value)} >
             <option value='-1'>---</option>
             {
@@ -73,7 +74,7 @@ export default function Filter(): React.JSX.Element {
           <input className='rdtfilter-item__text' type="text" value={filterText} onChange={event => setFilterText(event.target.value)} />
           <IconButtonAdd width={20} title={mainContext.options?.textLabels?.filter?.add} onClick={addFilter} />
         </div>
-        <ul className='rdtfilter-list' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+        <ul className='rdtfilter-list' style={style}>
           {
             listFilter.map(filter => (
               <li key={filter.column.value} className='rdtfilter-list__li'>

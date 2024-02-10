@@ -12,7 +12,8 @@ export default function Table() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowPerPage, setRowPerPage] = useState<number>(mainContext.options?.rowsPerPage ? mainContext.options?.rowsPerPage : 10);
   const sortedField = useRef({ title: '', kind: true });
-
+  const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
+  const styleBorder = { borderColor: mainContext.options?.color?.borderColor }
 
   const sortData = (fieldTitle: string) => {
     let tempData = [...mainContext.rowData];
@@ -65,13 +66,13 @@ export default function Table() {
   }, [rowPerPage])
 
   return (
-    <div id='div-table' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+    <div id='div-table' style={style}>
       <table id='data-table' className='rdttable' onClick={closeMenuSubItems}>
         <thead>
           <tr className={mainContext.options?.responsive ? 'rdttable-header--res' : ''}>
             {
               !mainContext.options?.selectableRowsHideCheckboxes &&
-              <th style={{ borderColor: mainContext.options?.color?.borderColor }}>
+              <th style={styleBorder}>
                 <input type="checkbox" onChange={event => selectAllRows(event.target.checked)} />
               </th>
             }
@@ -92,8 +93,8 @@ export default function Table() {
               <tr key={data.id} className={mainContext.options?.responsive ? 'rdttable-row--res' : ''} onClick={() => onRowClick(data)}>
                 {
                   !mainContext.options?.selectableRowsHideCheckboxes &&
-                  <td className={mainContext.options?.responsive ? 'rdttable-row__select--res' : 'rdttable-row__select'} style={{ borderColor: mainContext.options?.color?.borderColor }}>
-                    <input type="checkbox" data-testid= 'rdt-table-row__select-cell' className='rdttable-row__select-cell' onChange={(event) => selectRow(event.target.checked)} />
+                  <td className={mainContext.options?.responsive ? 'rdttable-row__select--res' : 'rdttable-row__select'} style={styleBorder}>
+                    <input type="checkbox" data-testid='rdt-table-row__select-cell' className='rdttable-row__select-cell' onChange={(event) => selectRow(event.target.checked)} />
                   </td>
                 }
                 {

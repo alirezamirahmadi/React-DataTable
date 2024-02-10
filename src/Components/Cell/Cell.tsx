@@ -5,12 +5,12 @@ import { ColumnType, elemEventType } from "../../Type/Type";
 import './Cell.css';
 
 
-
-export default function Cell({ column, row }: { column: ColumnType, row: any }):React.JSX.Element {
+export default function Cell({ column, row }: { column: ColumnType, row: any }): React.JSX.Element {
   const mainContext = useContext(MainContext);
   const [cellValue, setCellValue] = useState<any>('');
   const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
   const [componentValue, setComponentValue] = useState<any>('');
+  const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
 
   const onChangeInput = (event: elemEventType, eventFunction?: (event: elemEventType) => void) => {
     setCellValue(event.target.value);
@@ -35,7 +35,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
         setCellValue(row[column.field.title]);
         break;
       case 'select':
-        setCellValue(row[column.field.title]?.index && row[column.field.title]?.options && row[column.field.title]?.index < row[column.field.title]?.options.length  ? row[column.field.title].options[row[column.field.title]?.index] : row[column.field.title]?.options[0]);
+        setCellValue(row[column.field.title]?.index && row[column.field.title]?.options && row[column.field.title]?.index < row[column.field.title]?.options.length ? row[column.field.title].options[row[column.field.title]?.index] : row[column.field.title]?.options[0]);
         break;
       case 'boolean':
         setCheckboxValue(row[column.field.title] ? row[column.field.title] : false);
@@ -104,7 +104,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
           {
             row[column.field.title] &&
             <select value={cellValue} className="rdtcell-select" onChange={(event) => onChangeInput(event, column.field.eventHandlerRow)}
-              style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}
+              style={style}
             >
               {
                 Array.isArray(row[column.field.title].options) &&
@@ -119,7 +119,6 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
     case 'component':
       return (
         <>
-          {/* {column.options?.component && column.options?.component(row[column.field.title], column.field?.eventHandlerRow ? column.field?.eventHandlerRow : () => { }, row)} */}
           {column.options?.component && column.options?.component(componentValue, (value) => onChangeComponent(value), row)}
         </>
       )

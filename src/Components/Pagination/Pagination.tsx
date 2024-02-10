@@ -8,6 +8,7 @@ export default function Pagination({ pageCount, currentPage, pageNoHandler, next
 	const mainContext = useContext(MainContext);
 	const [pageNo, setPageNo] = useState<number[]>([]);
 	const [rowPerPage, setRowPerPage] = useState<number>(mainContext.options?.rowsPerPage ? mainContext.options?.rowsPerPage : 10);
+	const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
 
 	const handleChengeRowPerPage = (value: number) => {
 		setRowPerPage(value);
@@ -25,7 +26,7 @@ export default function Pagination({ pageCount, currentPage, pageNoHandler, next
 	return (
 		<>
 			<div data-testid="rdt-pagination" className="rdtpagination">
-				<div className='rdtpagination-pages' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+				<div className='rdtpagination-pages' style={style}>
 					{first && <input type="button" title={mainContext.options?.textLabels?.pagination?.first} className="rdtpagination-pages__no" value='<<' disabled={currentPage === 1} onClick={() => pageNoHandler(1, rowPerPage)} />}
 					{previous && <input type="button" title={mainContext.options?.textLabels?.pagination?.previous} className="rdtpagination-pages__no" value='<' disabled={currentPage === 1} onClick={() => pageNoHandler(currentPage > 1 ? currentPage - 1 : currentPage, rowPerPage)} />}
 					{pageNo.map(no =>
@@ -34,7 +35,7 @@ export default function Pagination({ pageCount, currentPage, pageNoHandler, next
 					{next && <input type="button" title={mainContext.options?.textLabels?.pagination?.next} className="rdtpagination-pages__no" value='>' disabled={currentPage === pageNo.length} onClick={() => pageNoHandler(currentPage < pageCount ? currentPage + 1 : currentPage, rowPerPage)} />}
 					{last && <input type="button" title={mainContext.options?.textLabels?.pagination?.last} className="rdtpagination-pages__no" value='>>' disabled={currentPage === pageNo.length} onClick={() => pageNoHandler(pageCount, rowPerPage)} />}
 				</div>
-				<div style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
+				<div style={style}>
 					<span>{mainContext.options?.textLabels?.pagination?.rowsPerPage}</span>
 					<select className="rdtpagination-per-page" value={rowPerPage} onChange={event => handleChengeRowPerPage(Number(event.target.value))}>
 						{
