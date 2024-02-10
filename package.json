@@ -4,24 +4,40 @@
   "version": "1.0.0",
   "main": "ReactDataTable.tsx",
   "type": "module",
-  "license":"MIT",
-  "author": {"name": "Alireza Mirahmadi"},
-  "keywords": ["react", "data table"],
+  "license": "MIT",
+  "author": {
+    "name": "Alireza Mirahmadi"
+  },
+  "keywords": [
+    "react",
+    "data table"
+  ],
   "homepage": "https://github.com/alirezamirahmadi/React-DataTable",
-  "repository": {"type": "git", "url": "https://github.com/alirezamirahmadi/React-DataTable"},
-  "bugs": {"url": "https://github.com/alirezamirahmadi/React-DataTable/issues"},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alirezamirahmadi/React-DataTable"
+  },
+  "bugs": {
+    "url": "https://github.com/alirezamirahmadi/React-DataTable/issues"
+  },
   "description": "It's a datatable component on React. It comes with features like filtering, search, view/hide columns, export to excel file, printing, sorting, selectable rows, pagination, and responsible for mobile/tablet device. On top of the ability to put component, textbox, checkbox, button, img, ... in cells",
   "scripts": {
-    "dev": "vite --port 2501",
+    "dev": "vite --port 2502",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "dependencies": {
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -30,6 +46,10 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }

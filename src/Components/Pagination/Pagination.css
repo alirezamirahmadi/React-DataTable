@@ -17,6 +17,16 @@
     margin: 0 1px;
 }
 
+.rdtpagination-pages__no--select{
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
+    margin: 0 1px;
+    text-decoration: underline;
+}
+
 .rdtpagination-per-page{
     height: 23px;
     border-radius: 5px;

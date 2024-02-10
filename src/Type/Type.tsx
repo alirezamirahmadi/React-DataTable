@@ -16,7 +16,7 @@ type ColumnOptionType = {
 type ColumnType = {
   field: FieldColumnType,
   label: string,
-  kind?: 'input/textbox' | 'input/date' | 'input/datetime-local' | 'input/number' | 'input/file' | 'input/password' | 'textarea' | 'button' | 'image' | 'boolean' | 'select' | 'progress' | 'component',
+  kind?: 'input/textbox' | 'input/date' | 'input/datetime-local' | 'input/number' | 'input/password' | 'textarea' | 'button' | 'image' | 'boolean' | 'select' | 'progress' | 'component',
   options?: ColumnOptionType,
   eventHandlerHeader?: (value: any) => void,
 }

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useContext } from 'react';
 
-import { MainContext } from '../../DataTable/DataTable';
+import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import Cell from '../Cell/Cell';
 import Pagination from '../Pagination/Pagination';
 import './Table.css';
@@ -93,7 +93,7 @@ export default function Table() {
                 {
                   !mainContext.options?.selectableRowsHideCheckboxes &&
                   <td className={mainContext.options?.responsive ? 'rdttable-row__select--res' : 'rdttable-row__select'} style={{ borderColor: mainContext.options?.color?.borderColor }}>
-                    <input type="checkbox" className='rdttable-row__select-cell' onChange={(event) => selectRow(event.target.checked)} />
+                    <input type="checkbox" data-testid= 'rdt-table-row__select-cell' className='rdttable-row__select-cell' onChange={(event) => selectRow(event.target.checked)} />
                   </td>
                 }
                 {

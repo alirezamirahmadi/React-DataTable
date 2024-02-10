@@ -17,7 +17,7 @@ const editProduct = (value: any) => {
 const tableHeader: ColumnType[] = [
   { field: { title: 'id' }, label: 'ID', },
   { field: { title: 'image' }, label: 'Image', kind: 'image' },
-  { field: { title: 'pname' }, label: 'Name', },
+  { field: { title: 'pname' }, label: 'Name',},
   { field: { title: 'section' }, label: 'Section', },
   { field: { title: 'price' }, label: 'Price', options: { sort: true } },
   { field: { title: 'stock' }, label: 'Stock', },
@@ -53,8 +53,8 @@ function App() {
 
   return (
     <>
-      <Example />
-      {/* <DataTable direction='ltr' columns={tableHeader} rows={products} options={{responsive:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} /> */}
+      {/* <Example /> */}
+      <DataTable direction='ltr' columns={tableHeader} rows={products} options={{responsive:true, rowsPerPage:4, rowsPerPageOptions:[1, 4, 8, 12], color: { color: 'white', backgroundColor: 'black', borderColor: '#ddd' } , textLabels:{body:{title:'main Table'}}}} />
     </>
   )
 }

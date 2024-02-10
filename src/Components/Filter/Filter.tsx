@@ -1,7 +1,7 @@
 
 import { useRef, useState, useEffect, useContext } from 'react'
 
-import { MainContext } from '../../DataTable/DataTable';
+import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import { filterType, ColumnType } from '../../Type/Type'
 import { IconButtonAdd, IconButtonClose } from '../IconButton/IconButton';
 import './Filter.css'
@@ -46,7 +46,7 @@ export default function Filter(): React.JSX.Element {
 
   return (
     <>
-      <div className="rdtfilter" >
+      <div data-testid='rdt-filter' className="rdtfilter" >
         <div className="rdtfilter__title">
           <span>{mainContext.options?.textLabels?.filter?.title}</span>
           <IconButtonClose width={15} onClick={() => mainContext.setShowMenuSubItems({ ...mainContext.showMenuSubItems, filter: false })} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { MainContext } from "../../DataTable/DataTable";
+import { MainContext } from "../../ReactDataTable/ReactDataTable";
 import { PaginationType } from "../../Type/Type";
 import './Pagination.css';
 
@@ -24,12 +24,12 @@ export default function Pagination({ pageCount, currentPage, pageNoHandler, next
 
 	return (
 		<>
-			<div className="rdtpagination">
+			<div data-testid="rdt-pagination" className="rdtpagination">
 				<div className='rdtpagination-pages' style={{ color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }}>
 					{first && <input type="button" title={mainContext.options?.textLabels?.pagination?.first} className="rdtpagination-pages__no" value='<<' disabled={currentPage === 1} onClick={() => pageNoHandler(1, rowPerPage)} />}
 					{previous && <input type="button" title={mainContext.options?.textLabels?.pagination?.previous} className="rdtpagination-pages__no" value='<' disabled={currentPage === 1} onClick={() => pageNoHandler(currentPage > 1 ? currentPage - 1 : currentPage, rowPerPage)} />}
 					{pageNo.map(no =>
-						<input key={no} type="button" className="rdtpagination-pages__no" value={no} onClick={() => pageNoHandler(no, rowPerPage)} />
+						<input key={no} type="button" className={currentPage === no ? 'rdtpagination-pages__no--select' : 'rdtpagination-pages__no'} value={no} onClick={() => pageNoHandler(no, rowPerPage)} />
 					)}
 					{next && <input type="button" title={mainContext.options?.textLabels?.pagination?.next} className="rdtpagination-pages__no" value='>' disabled={currentPage === pageNo.length} onClick={() => pageNoHandler(currentPage < pageCount ? currentPage + 1 : currentPage, rowPerPage)} />}
 					{last && <input type="button" title={mainContext.options?.textLabels?.pagination?.last} className="rdtpagination-pages__no" value='>>' disabled={currentPage === pageNo.length} onClick={() => pageNoHandler(pageCount, rowPerPage)} />}

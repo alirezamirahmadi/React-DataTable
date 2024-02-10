@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
 
-import { MainContext } from '../../DataTable/DataTable';
+import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import { ColumnType, elemEventType } from "../../Type/Type";
 import './Cell.css';
 
 
 
-export default function Cell({ column, row }: { column: ColumnType, row: any }) {
+export default function Cell({ column, row }: { column: ColumnType, row: any }):React.JSX.Element {
   const mainContext = useContext(MainContext);
   const [cellValue, setCellValue] = useState<any>('');
   const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
@@ -30,7 +30,6 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
       case 'input/date':
       case 'input/datetime-local':
       case 'input/number':
-      case 'input/file':
       case 'input/password':
       case 'textarea':
         setCellValue(row[column.field.title]);
@@ -54,7 +53,6 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }) 
     case 'input/date':
     case 'input/datetime-local':
     case 'input/number':
-    case 'input/file':
     case 'input/password':
       return (
         <>

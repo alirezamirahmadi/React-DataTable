@@ -167,6 +167,7 @@ These class names are useful for styling with CSS. They are applied to the
 |**`rdtpagination`**|Styles applied to the pagination box|
 |**`rdtpagination-pages`**|Styles applied to the number pagination box|
 |**`rdtpagination-pages__no`**|Styles applied to the number pagination|
+|**`rdtpagination-pages__no--select`**|Styles applied to the current page no|
 |**`rdtpagination-per-page`**|Styles applied to the per page select|
 |**`rdtsearch`**|Styles applied to the search box|
 |**`rdtsearch__input`**|Styles applied to the input on search box|
