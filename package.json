@@ -12,13 +12,13 @@
     "react",
     "data table"
   ],
-  "homepage": "https://github.com/alirezamirahmadi/React-DataTable",
+  "homepage": "https://github.com/alirezamirahmadi/react-responsive-datatable",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alirezamirahmadi/React-DataTable"
+    "url": "https://github.com/alirezamirahmadi/react-responsive-datatable"
   },
   "bugs": {
-    "url": "https://github.com/alirezamirahmadi/React-DataTable/issues"
+    "url": "https://github.com/alirezamirahmadi/react-responsive-datatable/issues"
   },
   "description": "It's a datatable component on React. It comes with features like filtering, search, view/hide columns, export to excel file, printing, sorting, selectable rows, pagination, and responsible for mobile/tablet device. On top of the ability to put component, textbox, checkbox, button, img, ... in cells",
   "scripts": {
