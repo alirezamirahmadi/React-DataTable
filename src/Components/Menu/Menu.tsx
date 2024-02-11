@@ -57,7 +57,7 @@ export default function Menu(): React.JSX.Element {
   const handleDelete = () => {
     let tempRows = [...mainContext.rowData];
     let selectedRows: any[] = [];
-    let selectRow = (document.querySelectorAll('.td-select-row') as NodeListOf<HTMLInputElement>);
+    let selectRow = (document.querySelectorAll('.rdttable-row__select-cell') as NodeListOf<HTMLInputElement>);
     selectRow.forEach((element, index) => {
       element.checked && selectedRows.push(tempRows.splice(index - selectedRows.length, 1));
     })

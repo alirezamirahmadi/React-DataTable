@@ -1,10 +1,10 @@
 
-
+import Example from "../examples/Example-Simple/Simple"
 function App() {
 
   return (
     <>
-
+      <Example />
     </>
   )
 }

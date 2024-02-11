@@ -1,4 +1,4 @@
-import {useState, useRef, useContext, useEffect} from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import { IconButtonClose } from '../IconButton/IconButton';
@@ -26,7 +26,7 @@ export default function Search(): React.JSX.Element {
       <div data-testid='rdt-search' className='rdtsearch' style={style}>
         <input type='text' ref={txtSearch} className='rdtsearch__input' value={searchValue} onChange={(event) => searchTable(event.target.value)} placeholder={mainContext.options?.searchPlaceholder} />
         <button className='rdtsearch__close' >
-          <IconButtonClose width={18} onClick={() => searchTable('')} />
+          <IconButtonClose width={18} onClick={() => mainContext.setShowMenuSubItems({ ...mainContext.showMenuSubItems, search: false })} />
         </button>
       </div>
     </>

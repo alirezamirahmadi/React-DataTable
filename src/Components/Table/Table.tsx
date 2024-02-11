@@ -90,7 +90,7 @@ export default function Table() {
         <tbody>
           {
             currentRows.map((data: any) => (
-              <tr key={data.id} className={mainContext.options?.responsive ? 'rdttable-row--res' : ''} onClick={() => onRowClick(data)}>
+              <tr key={data[mainContext.columnData[0].field.title] + data[mainContext.columnData[1].field.title]} className={mainContext.options?.responsive ? 'rdttable-row--res' : ''} onClick={() => onRowClick(data)}>
                 {
                   !mainContext.options?.selectableRowsHideCheckboxes &&
                   <td className={mainContext.options?.responsive ? 'rdttable-row__select--res' : 'rdttable-row__select'} style={styleBorder}>

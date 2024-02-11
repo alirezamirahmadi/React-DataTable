@@ -1,4 +1,4 @@
-# <p align="center">React DataTable</p>
+# <p align="center">React DataTable Responsive</p>
 
 <p align="center">
 <img height="30" alt="typescript" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg">
@@ -41,7 +41,7 @@
 
 ## Install
 
-`npm install --save`
+`npm i react-datatable-responsive`
 
 ## Demo
 
@@ -50,8 +50,8 @@
 #### simple table
 
 ``` js
-import DataTable from '../../src/DataTable/DataTable';
-import { ColumnType } from '../../src/Type/Type';
+import ReactDataTable from 'react-datatable-responsive';
+import { ColumnType } from 'react-datatable-responsive';
 
 const columns: ColumnType[] = [
   { field: { title: 'title' }, label: 'Title' },
@@ -75,8 +75,8 @@ export default function Example() {
 #### custemized columns
 
 ``` js
-import DataTable from '../../src/DataTable/DataTable';
-import { ColumnType } from '../../src/Type/Type';
+import ReactDataTable from 'react-datatable-responsive';
+import { ColumnType } from 'react-datatable-responsive';
 
 const columns: ColumnType[] = [
   { field: { title: 'id' }, label: 'ID', options: { display: false } },
