@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useContext } from 'react';
-
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import Cell from '../Cell/Cell';
 import Pagination from '../Pagination/Pagination';
@@ -90,7 +89,7 @@ export default function Table() {
         <tbody>
           {
             currentRows.map((data: any) => (
-              <tr key={data[mainContext.columnData[0].field.title] + data[mainContext.columnData[1].field.title]} className={mainContext.options?.responsive ? 'rdttable-row--res' : ''} onClick={() => onRowClick(data)}>
+              <tr key={JSON.stringify(data)} className={mainContext.options?.responsive ? 'rdttable-row--res' : ''} onClick={() => onRowClick(data)}>
                 {
                   !mainContext.options?.selectableRowsHideCheckboxes &&
                   <td className={mainContext.options?.responsive ? 'rdttable-row__select--res' : 'rdttable-row__select'} style={styleBorder}>

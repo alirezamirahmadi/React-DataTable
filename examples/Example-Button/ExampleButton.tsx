@@ -8,17 +8,17 @@ export default function Example(): React.JSX.Element {
   const stock = useRef<string>('');
 
   const editProduct = (value: any) => {
-    console.log('New vlaue: ', stock.current , ' Old value ', value.stock);
+    console.log('New vlaue: ', stock.current, ' Old value ', value.stock);
   }
   const onChangeStock = (event: React.ChangeEvent<HTMLInputElement>) => {
     stock.current = event.target.value;
   }
 
   const columns: ColumnType[] = [
-    { field: { title: 'title' }, label: 'Title', },
-    { field: { title: 'stock', eventHandlerRow: onChangeStock }, label: 'Stock', kind: 'input/number' },
+    { field: { title: 'title' }, label: 'Title', options: { sort: true } },
+    { field: { title: 'stock', eventHandlerRow: onChangeStock }, label: 'Stock', kind: 'input/number' , options: { sort: true } },
     { field: { title: 'category' }, label: 'Category', },
-    { field: { title: 'click me!', eventHandlerRow: editProduct }, label: 'Modify', kind: 'button' },
+    { field: { title: 'Edit', eventHandlerRow: editProduct }, label: 'Modify', kind: 'button' },
   ];
 
 

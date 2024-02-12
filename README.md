@@ -27,7 +27,6 @@
 ## Table of contents
 
 - [Install](#install)
-- [Demo](#demo)
 - [Usage](#usage)
 - [API](#api)
     - [ReactDataTable](#reactdatatable)
@@ -42,8 +41,6 @@
 ## Install
 
 `npm i react-datatable-responsive`
-
-## Demo
 
 ## Usage
 

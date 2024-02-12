@@ -4,6 +4,7 @@ import { ContextType, ReactDataTableType, filterType, ColumnType, ColumnOptionTy
 import Table from "../Components/Table/Table";
 import Menu from "../Components/Menu/Menu";
 import defaultOptions from "../Options/defaultOptions";
+import '../Style/main.css'
 
 const MainContext = createContext<ContextType>(
   {
