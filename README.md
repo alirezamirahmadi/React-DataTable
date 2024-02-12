@@ -5,6 +5,8 @@
 <img height="30" alt="react" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg">
 </p>
 
+![react-datatable-responsive](https://github.com/alirezamirahmadi/react-datatable-responsive/assets/155379176/a4bf38fb-796e-4fc0-8d5a-9d49db17abd2)
+
 
 ### It's a datatable component on React. It comes with features like filtering, search, view/hide columns, export to excel file, printing, sorting, selectable rows, pagination, and responsible for mobile/tablet device. On top of the ability to put component, textbox, checkbox, button, img, ... in cells.
 
