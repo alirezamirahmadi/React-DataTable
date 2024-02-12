@@ -26,6 +26,10 @@
 - resizable columns
 - component, textbox, checkbox, button, img, and ... in cells
 
+
+![component](https://github.com/alirezamirahmadi/react-datatable-responsive/assets/155379176/98a6ea3e-150b-4581-b032-ca2ad2b97088)
+
+
 ## Table of contents
 
 - [Install](#install)
