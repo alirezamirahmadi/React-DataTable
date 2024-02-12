@@ -1,5 +1,4 @@
-
-import Example from "./examples/Example-Component/ExampleComponent"
+import Example from './examples/Example-Button/ExampleButton'
 function App() {
 
   return (

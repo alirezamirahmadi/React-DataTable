@@ -77,8 +77,8 @@ export default function Table() {
             }
             {
               mainContext.columnData.map(header => (
-                <th key={header.field.title} className={mainContext.options?.resizableColumns ? 'rdttable-resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.options?.display === false ? 'none' : 'table-cell' }} onClick={() => header.options?.sort && sortData(header.field.title)}>
-                  <span className={header.options?.sort ? 'rdttable-header__label' : ''} title={header.options?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''}>{header.label}</span>
+                <th key={header.field.title} className={mainContext.options?.resizableColumns ? 'rdttable-resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.options?.display === false ? 'none' : 'table-cell' }}>
+                  <span className={header.options?.sort ? 'rdttable-header__label' : ''} title={header.options?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''} onClick={() => header.options?.sort && sortData(header.field.title)}>{header.label}</span>
                   {sortedField.current.title === header.field.title && !sortedField.current.kind && <IconButtonArrowDown width={15} />}
                   {sortedField.current.title === header.field.title && sortedField.current.kind && <IconButtonArrowUp width={15} />}
                 </th>
