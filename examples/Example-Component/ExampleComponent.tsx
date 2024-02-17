@@ -58,6 +58,6 @@ const columns: ColumnType[] = [
 
 export default function Example(): React.JSX.Element {
   return (
-    <DataTable rows={ProductsData} columns={columns} options={{ cells: { imageWidth: 45 } }} />
+    <DataTable rows={ProductsData} columns={columns} options={{ color:{color:'#fff', backgroundColor:'#000', borderColor:'#666'}, cells: { imageWidth: 45 } }} />
   )
 }

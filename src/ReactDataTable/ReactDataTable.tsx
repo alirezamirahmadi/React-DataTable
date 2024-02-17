@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useRef, useEffect } from "react";
+import { useReactToPrint } from "react-to-print";
 
 import { ContextType, ReactDataTableType, filterType, ColumnType, ColumnOptionType, OptionType } from "../Type/Type";
 import Table from "../Components/Table/Table";
 import Menu from "../Components/Menu/Menu";
 import defaultOptions from "../Options/defaultOptions";
-import '../Style/main.css'
+import '../Style/main.css';
 
 const MainContext = createContext<ContextType>(
   {
@@ -12,13 +13,20 @@ const MainContext = createContext<ContextType>(
     columnData: [],
     showMenuSubItems: { filter: false, search: false, displayColumns: false },
     countSelectedRows: 0,
+    listFilter: [],
+    sortedField: { title: '', kind: false },
+    searchValue: '',
     options: undefined,
     setRowData: () => null,
     setColumnData: () => null,
     setShowMenuSubItems: () => null,
     setCountSelectedRows: () => null,
+    setListFilter: () => null,
+    setSearchValue: () => null,
     handleFilter: () => null,
+    sortData: () => null,
     handleSearch: () => null,
+    handlePrint: () => null,
     displayColumn: () => null,
   }
 );
@@ -28,8 +36,20 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
   const [columnData, setColumnData] = useState<ColumnType[]>(columns);
   const [showMenuSubItems, setShowMenuSubItems] = useState({ filter: false, search: false, displayColumns: false });
   const [countSelectedRows, setCountSelectedRows] = useState<number>(0);
+  const [listFilter, setListFilter] = useState<filterType[]>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const sortedField = useRef({ title: '', kind: false });
+  const tableRef = useRef(null);
 
-  const handleFilter = (listFilter: filterType[]) => {
+  const handleFilter = () => {
+    sortData(search(filter()), '');
+  }
+
+  const handleSearch = () => {
+    sortData(search(filter()), '');
+  }
+
+  const filter = () => {
     let tempRows = [...rows];
     listFilter.map(filter => {
       switch (filter.condition.value) {
@@ -50,25 +70,25 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
           break;
       }
     })
-    return setRowData(tempRows);
+    return tempRows;
   }
 
-  const handleSearch = (value: string) => {
-    if (value === '') {
-      setRowData(rows);
-      return;
+  const search = (row: any[]) => {
+    if (searchValue === '') {
+      return row;
     }
-
-    let tempRow: any[] = [];
-    let includeValue: boolean = false;
-    rowData.map((data: any) => {
-      includeValue = false;
-      columns.map(column => {
-        if (column.options?.search != false && column.options?.display != false && (data[column.field.title] + '').toString().toLowerCase().includes(value.toLowerCase())) includeValue = true;
+    else {
+      let tempRow: any[] = [];
+      let includeValue: boolean = false;
+      row.map((data: any) => {
+        includeValue = false;
+        columns.map(column => {
+          if (column.options?.search != false && column.options?.display != false && (data[column.field.title] + '').toString().toLowerCase().includes(searchValue.toLowerCase())) includeValue = true;
+        })
+        includeValue && tempRow.push(data);
       })
-      includeValue && tempRow.push(data);
-    })
-    setRowData(tempRow);
+      return tempRow;
+    }
   }
 
   const displayColumn = (checked: boolean, label: string) => {
@@ -86,6 +106,33 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     setColumnData(tempColumn);
   }
 
+  const sortData = (row: any[], fieldTitle: string) => {
+    let field: string = fieldTitle ? fieldTitle : sortedField.current.title;
+    let tempData = [...row];
+    if (fieldTitle) {
+      sortedField.current.title = fieldTitle;
+      sortedField.current.kind = !sortedField.current.kind;
+    }
+    tempData.sort((a: any, b: any) => {
+      const nameA = typeof a[field] === 'string' ? a[field].toUpperCase() : a[field];
+      const nameB = typeof b[field] === 'string' ? b[field].toUpperCase() : b[field];
+      return nameA < nameB ? (sortedField.current.kind ? -1 : 1) : (sortedField.current.kind ? 1 : -1);
+    });
+    setRowData(tempData);
+  }
+
+  const handlePrint = useReactToPrint({
+    content: () => tableRef.current,
+  })
+
+  useEffect(()=> {
+    handleSearch();
+  }, [searchValue])
+
+  useEffect(() => {
+    handleFilter();
+  }, [listFilter])
+
   return (
     <>
       <MainContext.Provider value={{
@@ -93,18 +140,25 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
         columnData,
         showMenuSubItems,
         countSelectedRows,
+        listFilter,
+        sortedField: sortedField.current,
+        searchValue,
         options: { ...defaultOptions, ...options },
         setRowData,
         setColumnData,
         setShowMenuSubItems,
         setCountSelectedRows,
+        setListFilter,
+        setSearchValue,
         handleFilter,
+        sortData,
         handleSearch,
+        handlePrint,
         displayColumn,
       }}>
         <div id='div-datatable' dir={direction} >
           <Menu />
-          <Table />
+          <Table ref={tableRef}/>
         </div>
       </MainContext.Provider>
     </>
@@ -112,4 +166,4 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
 }
 
 export { MainContext };
-export type {ReactDataTableType, ColumnType, ColumnOptionType, OptionType}
+export type { ReactDataTableType, ColumnType, ColumnOptionType, OptionType }

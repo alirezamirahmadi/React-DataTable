@@ -2,28 +2,28 @@
 import { useRef, useState, useEffect, useContext } from 'react'
 
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
-import { filterType, ColumnType } from '../../Type/Type'
+import { ColumnType } from '../../Type/Type'
 import { IconButtonAdd, IconButtonClose } from '../IconButton/IconButton';
 import './Filter.css'
 
 export default function Filter(): React.JSX.Element {
   const mainContext = useContext(MainContext);
   const [filterColumn, setFilterColumn] = useState('');
-  const [listFilter, setListFilter] = useState<filterType[]>([]);
   const [filterCondition, setFilterCondition] = useState('');
   const [filterText, setFilterText] = useState('');
+  const txtFilter = useRef<HTMLInputElement>(null);
   const slFilterColumn = useRef<HTMLSelectElement>(null);
   const slFilterCondition = useRef<HTMLSelectElement>(null);
   const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
 
   const addFilter = () => {
     if (filterColumn === '-1' || filterCondition === '-1' || filterText === '' ||
-      listFilter.some(filter => filter.column.value === filterColumn)) {
+      mainContext.listFilter.some(filter => filter.column.value === filterColumn)) {
       return;
     }
-    let tempFilter = [...listFilter];
+    let tempFilter = [...mainContext.listFilter];
     tempFilter.push({ column: { value: filterColumn, label: slFilterColumn.current ? getTextOfSelect(slFilterColumn.current, filterColumn) : '' }, condition: { value: filterCondition, label: slFilterCondition.current ? getTextOfSelect(slFilterCondition.current, filterCondition) : '' }, text: filterText, });
-    setListFilter(tempFilter);
+    mainContext.setListFilter(tempFilter);
   }
 
   const getTextOfSelect = (select: HTMLSelectElement, value: string): string => {
@@ -37,13 +37,13 @@ export default function Filter(): React.JSX.Element {
   }
 
   const removeFilter = (column: string) => {
-    let tempFilter = listFilter.filter(filter => filter.column.value != column);
-    setListFilter(tempFilter);
+    let tempFilter = mainContext.listFilter.filter(filter => filter.column.value != column);
+    mainContext.setListFilter(tempFilter);
   }
 
   useEffect(() => {
-    mainContext.handleFilter(listFilter);
-  }, [listFilter])
+    txtFilter.current?.focus();
+  }, [filterColumn, filterCondition])
 
   return (
     <>
@@ -71,12 +71,12 @@ export default function Filter(): React.JSX.Element {
             <option className='rdtfilter-condition__option' value="Include">Include</option>
             <option className='rdtfilter-condition__option' value="DontInclude">Don't Include</option>
           </select>
-          <input className='rdtfilter-item__text' type="text" value={filterText} onChange={event => setFilterText(event.target.value)} />
+          <input ref={txtFilter} className='rdtfilter-item__text' type="text" value={filterText} onChange={event => setFilterText(event.target.value)} />
           <IconButtonAdd width={20} title={mainContext.options?.textLabels?.filter?.add} onClick={addFilter} />
         </div>
         <ul className='rdtfilter-list' style={style}>
           {
-            listFilter.map(filter => (
+            mainContext.listFilter.map(filter => (
               <li key={filter.column.value} className='rdtfilter-list__li'>
                 <span>{filter.column.label} - {filter.condition.label} - {filter.text}</span>
                 <IconButtonClose width={15} title={mainContext.options?.textLabels?.filter?.delete} onClick={() => removeFilter(filter.column.value)} />

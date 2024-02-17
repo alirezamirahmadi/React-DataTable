@@ -8,9 +8,10 @@ import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import Filter from '../Filter/Filter';
 import Search from '../Search/Search';
 import ShowColumns from '../ShowColumns/ShowColumns';
+import { showMenuSubItemsType } from '../../Type/Type';
 import './Menu.css';
 
-const defualtShowItems = {filter:false, search:false, displayColumns:false};
+const defualtShowItems = { filter: false, search: false, displayColumns: false };
 
 export default function Menu(): React.JSX.Element {
   const mainContext = useContext(MainContext);
@@ -35,25 +36,29 @@ export default function Menu(): React.JSX.Element {
 
   const printTable = () => {
     mainContext.setShowMenuSubItems(defualtShowItems);
-    let printWindow = window.open('', '');
-    printWindow?.document.write('<html><head><title>Table Contents</title>');
 
-    let table_style = document.getElementById("data-table")!.getAttribute('style');
-    printWindow?.document.write('<style type = "text/css">');
-    printWindow?.document.write(table_style ? table_style : '');
-    printWindow?.document.write('</style>');
-    printWindow?.document.write('</head>');
+    mainContext.handlePrint();
 
-    printWindow?.document.write('<body>');
-    let divContents = document.getElementById("div-table")!.innerHTML;
-    printWindow?.document.write(divContents);
-    printWindow?.document.write('</body>');
+    // let printWindow = window.open('', '');
+    // printWindow?.document.write('<html><head><title>Table Contents</title>');
 
-    printWindow?.document.write('</html>');
-    printWindow?.document.close();
-    printWindow?.print();
+    // let table_style = document.getElementById("data-table")!.getAttribute('style');
+    // // let table_style = tableStyle.toString();
+    // printWindow?.document.write('<style type = "text/css">');
+    // printWindow?.document.write(table_style ? table_style : '');
+    // printWindow?.document.write('</style>');
+    // printWindow?.document.write('</head>');
+
+    // printWindow?.document.write('<body>');
+    // let divContents = document.getElementById("div-table")!.innerHTML;
+    // printWindow?.document.write(divContents);
+    // printWindow?.document.write('</body>');
+
+    // printWindow?.document.write('</html>');
+    // printWindow?.document.close();
+    // printWindow?.print();
   }
-  
+
   const handleDelete = () => {
     let tempRows = [...mainContext.rowData];
     let selectedRows: any[] = [];
@@ -72,11 +77,11 @@ export default function Menu(): React.JSX.Element {
         mainContext.countSelectedRows === 0
           ?
           <div className='rdtmenu-main' style={style}>
-            {mainContext.options?.viewColumns && <IconButtonShowColumns width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, displayColumns:!mainContext.showMenuSubItems.displayColumns})} title={mainContext.options?.textLabels?.menu?.viewColumns} />}
-            {mainContext.options?.filter && <IconButtonFilter width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, filter:!mainContext.showMenuSubItems.filter})} title={mainContext.options?.textLabels?.menu?.filterTable} />}
+            {mainContext.options?.viewColumns && <IconButtonShowColumns width={25} onClick={() => mainContext.setShowMenuSubItems((preValue: showMenuSubItemsType) => ({ ...preValue, filter: false, displayColumns: !mainContext.showMenuSubItems.displayColumns }))} title={mainContext.options?.textLabels?.menu?.viewColumns} />}
+            {mainContext.options?.filter && <IconButtonFilter width={25} onClick={() => mainContext.setShowMenuSubItems((preValue: showMenuSubItemsType) => ({ ...preValue, displayColumns: false, filter: !mainContext.showMenuSubItems.filter }))} title={mainContext.options?.textLabels?.menu?.filterTable} />}
             {mainContext.options?.download && <IconButtonDownload width={25} onClick={convertToExcel} title={mainContext.options?.textLabels?.menu?.downloadExcel} />}
             {mainContext.options?.print && <IconButtonPrint width={25} onClick={printTable} title={mainContext.options?.textLabels?.menu?.print} />}
-            {mainContext.options?.search && <IconButtonSearch width={25} onClick={() => mainContext.setShowMenuSubItems({...defualtShowItems, search:!mainContext.showMenuSubItems.search})} title={mainContext.options?.textLabels?.menu?.search} />}
+            {mainContext.options?.search && <IconButtonSearch width={25} onClick={() => mainContext.setShowMenuSubItems({ ...defualtShowItems, search: !mainContext.showMenuSubItems.search })} title={mainContext.options?.textLabels?.menu?.search} />}
 
             {mainContext.showMenuSubItems.search && <Search />}
 

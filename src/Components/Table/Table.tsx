@@ -1,30 +1,31 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import Cell from '../Cell/Cell';
 import Pagination from '../Pagination/Pagination';
-import './Table.css';
 import { IconButtonArrowDown, IconButtonArrowUp } from '../IconButton/IconButton';
+import { showMenuSubItemsType } from '../../Type/Type';
+import './Table.css';
 
-export default function Table() {
+export default function Table({ref}:{ref:any}) {
   const mainContext = useContext(MainContext);
   const [currentRows, setCurrentRows] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowPerPage, setRowPerPage] = useState<number>(mainContext.options?.rowsPerPage ? mainContext.options?.rowsPerPage : 10);
-  const sortedField = useRef({ title: '', kind: true });
+  // const sortedField = useRef({ title: '', kind: true });
   const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
   const styleBorder = { borderColor: mainContext.options?.color?.borderColor }
 
-  const sortData = (fieldTitle: string) => {
-    let tempData = [...mainContext.rowData];
-    tempData.sort((a: any, b: any) => {
-      const nameA = typeof a[fieldTitle] === 'string' ? a[fieldTitle].toUpperCase() : a[fieldTitle];
-      const nameB = typeof b[fieldTitle] === 'string' ? b[fieldTitle].toUpperCase() : b[fieldTitle];
-      return nameA < nameB ? (sortedField.current.kind ? -1 : 1) : (sortedField.current.kind ? 1 : -1);
-    });
-    sortedField.current.title = fieldTitle;
-    sortedField.current.kind = !sortedField.current.kind;
-    mainContext.setRowData(tempData);
-  }
+  // const sortData = (fieldTitle: string) => {
+  //   let tempData = [...mainContext.rowData];
+  //   tempData.sort((a: any, b: any) => {
+  //     const nameA = typeof a[fieldTitle] === 'string' ? a[fieldTitle].toUpperCase() : a[fieldTitle];
+  //     const nameB = typeof b[fieldTitle] === 'string' ? b[fieldTitle].toUpperCase() : b[fieldTitle];
+  //     return nameA < nameB ? (sortedField.current.kind ? -1 : 1) : (sortedField.current.kind ? 1 : -1);
+  //   });
+  //   sortedField.current.title = fieldTitle;
+  //   sortedField.current.kind = !sortedField.current.kind;
+  //   mainContext.setRowData(tempData);
+  // }
 
   const selectAllRows = (checked: boolean) => {
     let selectRow = (document.querySelectorAll('.rdttable-row__select-cell') as NodeListOf<HTMLInputElement>);
@@ -49,7 +50,7 @@ export default function Table() {
   }
 
   const closeMenuSubItems = () => {
-    mainContext.setShowMenuSubItems({ filter: false, search: false, displayColumns: false });
+    mainContext.setShowMenuSubItems((preValue: showMenuSubItemsType) => ({ ...preValue, filter: false, displayColumns: false }));
   }
 
   const onRowClick = (rowData: any) => {
@@ -64,9 +65,13 @@ export default function Table() {
     currentPage != 1 ? setCurrentPage(1) : pagination();
   }, [rowPerPage])
 
+  // useEffect(()=>{
+  //   sortData(sortedField.current.title);
+  // }, [])
+
   return (
     <div id='div-table' style={style}>
-      <table id='data-table' className='rdttable' onClick={closeMenuSubItems}>
+      <table id='data-table' ref={ref} className='rdttable' onClick={closeMenuSubItems}>
         <thead>
           <tr className={mainContext.options?.responsive ? 'rdttable-header--res' : ''}>
             {
@@ -78,9 +83,9 @@ export default function Table() {
             {
               mainContext.columnData.map(header => (
                 <th key={header.field.title} className={mainContext.options?.resizableColumns ? 'rdttable-resizable-column' : ''} style={{ borderColor: mainContext.options?.color?.borderColor, display: header.options?.display === false ? 'none' : 'table-cell' }}>
-                  <span className={header.options?.sort ? 'rdttable-header__label' : ''} title={header.options?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''} onClick={() => header.options?.sort && sortData(header.field.title)}>{header.label}</span>
-                  {sortedField.current.title === header.field.title && !sortedField.current.kind && <IconButtonArrowDown width={15} />}
-                  {sortedField.current.title === header.field.title && sortedField.current.kind && <IconButtonArrowUp width={15} />}
+                  <span className={header.options?.sort ? 'rdttable-header__label' : ''} title={header.options?.sort ? mainContext.options?.textLabels?.body?.toolTip : ''} onClick={() => header.options?.sort && mainContext.sortData(mainContext.rowData, header.field.title)}>{header.label}</span>
+                  {mainContext.sortedField.title === header.field.title && mainContext.sortedField.kind && <IconButtonArrowDown width={15} />}
+                  {mainContext.sortedField.title === header.field.title && !mainContext.sortedField.kind && <IconButtonArrowUp width={15} />}
                 </th>
               ))
             }

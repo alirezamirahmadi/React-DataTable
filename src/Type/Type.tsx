@@ -10,7 +10,7 @@ type ColumnOptionType = {
   search?: boolean,
   filter?: boolean,
   display?: boolean,
-  component?: (value:any, updateValue:(event:any)=>void, rowData:any) => React.JSX.Element,
+  component?: (value: any, updateValue: (event: any) => void, rowData: any) => React.JSX.Element,
 }
 
 type ColumnType = {
@@ -24,15 +24,22 @@ type ColumnType = {
 type ContextType = {
   rowData: any,
   columnData: ColumnType[],
-  showMenuSubItems: { filter: boolean, search: boolean, displayColumns: boolean },
+  showMenuSubItems: showMenuSubItemsType,
   countSelectedRows: number,
+  listFilter: filterType[],
+  sortedField: { title: string, kind: boolean },
+  searchValue: string,
   options?: OptionType,
   setRowData: (rowData: any) => void,
   setColumnData: (columnData: any) => void,
   setShowMenuSubItems: (columnData: any) => void,
   setCountSelectedRows: (count: number) => void,
-  handleFilter: (listFilter: filterType[]) => void;
-  handleSearch: (value: string) => void;
+  setListFilter: (listFilter: filterType[]) => void;
+  setSearchValue: (value: string) => void;
+  handleFilter: () => void;
+  sortData: (row: any, fieldTitle: string) => void,
+  handleSearch: () => void;
+  handlePrint: () => void;
   displayColumn: (checked: boolean, label: string) => void;
   onDeleteRow?: (rows: any[]) => void;
 }
@@ -130,10 +137,12 @@ type ButtonType = {
   classStyle?: 'button-main' | 'button-second' | 'button-text',
 }
 
+type showMenuSubItemsType = { filter: boolean, search: boolean, displayColumns: boolean }
+
 type elemEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>
 
 
 export type {
   ColumnType, FieldColumnType, filterType, PaginationType, ButtonType, OptionType,
-  ContextType, ReactDataTableType, elemEventType, ColumnOptionType
+  ContextType, ReactDataTableType, elemEventType, ColumnOptionType, showMenuSubItemsType
 }
