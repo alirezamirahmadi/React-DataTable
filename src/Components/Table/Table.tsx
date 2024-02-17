@@ -1,4 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
+import { useReactToPrint } from "react-to-print";
+
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import Cell from '../Cell/Cell';
 import Pagination from '../Pagination/Pagination';
@@ -6,7 +8,7 @@ import { IconButtonArrowDown, IconButtonArrowUp } from '../IconButton/IconButton
 import { showMenuSubItemsType } from '../../Type/Type';
 import './Table.css';
 
-export default function Table({ref}:{ref:any}) {
+export default function Table() {
   const mainContext = useContext(MainContext);
   const [currentRows, setCurrentRows] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -14,6 +16,8 @@ export default function Table({ref}:{ref:any}) {
   // const sortedField = useRef({ title: '', kind: true });
   const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
   const styleBorder = { borderColor: mainContext.options?.color?.borderColor }
+  const tableRef = useRef(null);
+  mainContext.handlePrint = useReactToPrint({ content: () => tableRef.current, });
 
   // const sortData = (fieldTitle: string) => {
   //   let tempData = [...mainContext.rowData];
@@ -71,7 +75,12 @@ export default function Table({ref}:{ref:any}) {
 
   return (
     <div id='div-table' style={style}>
-      <table id='data-table' ref={ref} className='rdttable' onClick={closeMenuSubItems}>
+      <table id='data-table' ref={tableRef} className='rdttable' onClick={closeMenuSubItems}>
+        {!mainContext.options?.selectableRowsHideCheckboxes &&
+          <colgroup>
+            <col id='rdt-table-col__select' span={1} />
+          </colgroup>
+        }
         <thead>
           <tr className={mainContext.options?.responsive ? 'rdttable-header--res' : ''}>
             {

@@ -1,5 +1,4 @@
 import { createContext, useState, useRef, useEffect } from "react";
-import { useReactToPrint } from "react-to-print";
 
 import { ContextType, ReactDataTableType, filterType, ColumnType, ColumnOptionType, OptionType } from "../Type/Type";
 import Table from "../Components/Table/Table";
@@ -39,7 +38,6 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
   const [listFilter, setListFilter] = useState<filterType[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const sortedField = useRef({ title: '', kind: false });
-  const tableRef = useRef(null);
 
   const handleFilter = () => {
     sortData(search(filter()), '');
@@ -121,11 +119,9 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     setRowData(tempData);
   }
 
-  const handlePrint = useReactToPrint({
-    content: () => tableRef.current,
-  })
+  const handlePrint = () => void
 
-  useEffect(()=> {
+  useEffect(() => {
     handleSearch();
   }, [searchValue])
 
@@ -158,7 +154,7 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
       }}>
         <div id='div-datatable' dir={direction} >
           <Menu />
-          <Table ref={tableRef}/>
+          <Table />
         </div>
       </MainContext.Provider>
     </>

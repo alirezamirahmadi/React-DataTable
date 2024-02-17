@@ -18,18 +18,25 @@ export default function Menu(): React.JSX.Element {
   const style = { color: mainContext.options?.color?.color, backgroundColor: mainContext.options?.color?.backgroundColor, borderColor: mainContext.options?.color?.borderColor }
 
   const convertToExcel = () => {
-    tableToExcel()('data-table', 'table');
     mainContext.setShowMenuSubItems(defualtShowItems);
+    const selectAll = document.getElementById('rdt-table-col__select')!;
+    if (selectAll) {
+      selectAll.classList.toggle('hidden-select-row');
+      tableToExcel()('data-table', 'table');
+      selectAll.classList.toggle('hidden-select-row');
+    } else {
+      tableToExcel()('data-table', 'table');
+    }
   }
 
   const tableToExcel = () => {
-    var uri = 'data:application/vnd.ms-excel;base64,'
+    let uri = 'data:application/vnd.ms-excel;base64,'
       , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
       , base64 = function (s: any) { return window.btoa(unescape(encodeURIComponent(s))) }
       , format = function (s: any, c: any) { return s.replace(/{(\w+)}/g, function (m: any, p: any) { m++; return c[p]; }) }
     return function (table: any, name: string) {
       if (!table.nodeType) table = document.getElementById(table)
-      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+      let ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
       window.location.href = uri + base64(format(template, ctx))
     }
   }
@@ -37,26 +44,14 @@ export default function Menu(): React.JSX.Element {
   const printTable = () => {
     mainContext.setShowMenuSubItems(defualtShowItems);
 
-    mainContext.handlePrint();
-
-    // let printWindow = window.open('', '');
-    // printWindow?.document.write('<html><head><title>Table Contents</title>');
-
-    // let table_style = document.getElementById("data-table")!.getAttribute('style');
-    // // let table_style = tableStyle.toString();
-    // printWindow?.document.write('<style type = "text/css">');
-    // printWindow?.document.write(table_style ? table_style : '');
-    // printWindow?.document.write('</style>');
-    // printWindow?.document.write('</head>');
-
-    // printWindow?.document.write('<body>');
-    // let divContents = document.getElementById("div-table")!.innerHTML;
-    // printWindow?.document.write(divContents);
-    // printWindow?.document.write('</body>');
-
-    // printWindow?.document.write('</html>');
-    // printWindow?.document.close();
-    // printWindow?.print();
+    const selectAll = document.getElementById('rdt-table-col__select')!;
+    if (selectAll) {
+      selectAll.classList.toggle('hidden-select-row');
+      mainContext.handlePrint();
+      selectAll.classList.toggle('hidden-select-row');
+    } else {
+      mainContext.handlePrint();
+    }
   }
 
   const handleDelete = () => {
