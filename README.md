@@ -5,6 +5,11 @@
 <img height="30" alt="react" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg">
 </p>
 
+![NPM Downloads](https://img.shields.io/npm/dw/react-datatable-responsive)
+![npm package minimized gzipped size](https://img.shields.io/bundlejs/size/react-datatable-responsive)
+![NPM Version](https://img.shields.io/npm/v/react-datatable-responsive)
+
+
 ![react-datatable-responsive](https://github.com/alirezamirahmadi/react-datatable-responsive/assets/155379176/a4bf38fb-796e-4fc0-8d5a-9d49db17abd2)
 
 
