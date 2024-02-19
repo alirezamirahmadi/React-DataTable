@@ -15,7 +15,7 @@ export default function Search(): React.JSX.Element {
     txtSearch.current?.focus();
   }
   const onClose = () => {
-    searchTable('');
+    
     mainContext.setShowMenuSubItems({ ...mainContext.showMenuSubItems, search: false });
   }
   

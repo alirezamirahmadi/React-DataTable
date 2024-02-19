@@ -105,29 +105,34 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
   }
 
   const sortData = (row: any[], fieldTitle: string) => {
-    let field: string = fieldTitle ? fieldTitle : sortedField.current.title;
-    let tempData = [...row];
-    if (fieldTitle) {
-      sortedField.current.title = fieldTitle;
-      sortedField.current.kind = !sortedField.current.kind;
+    if (sortedField.current.title === '' && fieldTitle === '') {
+      setRowData(row);
     }
-    tempData.sort((a: any, b: any) => {
-      const nameA = typeof a[field] === 'string' ? a[field].toUpperCase() : a[field];
-      const nameB = typeof b[field] === 'string' ? b[field].toUpperCase() : b[field];
-      return nameA < nameB ? (sortedField.current.kind ? -1 : 1) : (sortedField.current.kind ? 1 : -1);
-    });
-    setRowData(tempData);
+    else {
+      let field: string = fieldTitle ? fieldTitle : sortedField.current.title;
+      let tempData = [...row];
+      if (fieldTitle) {
+        sortedField.current.title = fieldTitle;
+        sortedField.current.kind = !sortedField.current.kind;
+      }
+      tempData.sort((a: any, b: any) => {
+        const nameA = typeof a[field] === 'string' ? a[field].toUpperCase() : a[field];
+        const nameB = typeof b[field] === 'string' ? b[field].toUpperCase() : b[field];
+        return nameA < nameB ? (sortedField.current.kind ? -1 : 1) : (sortedField.current.kind ? 1 : -1);
+      });
+      setRowData(tempData);
+    }
   }
 
-  const handlePrint = () => void
+  const handlePrint = () => {}
 
-  useEffect(() => {
-    handleSearch();
-  }, [searchValue])
+    useEffect(() => {
+      handleSearch();
+    }, [searchValue])
 
-  useEffect(() => {
-    handleFilter();
-  }, [listFilter])
+    useEffect(()=>{
+      setSearchValue('');
+    }, [showMenuSubItems.search])
 
   return (
     <>

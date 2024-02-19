@@ -24,6 +24,9 @@ export default function Filter(): React.JSX.Element {
     let tempFilter = [...mainContext.listFilter];
     tempFilter.push({ column: { value: filterColumn, label: slFilterColumn.current ? getTextOfSelect(slFilterColumn.current, filterColumn) : '' }, condition: { value: filterCondition, label: slFilterCondition.current ? getTextOfSelect(slFilterCondition.current, filterCondition) : '' }, text: filterText, });
     mainContext.setListFilter(tempFilter);
+    setFilterText('');
+    setFilterColumn('');
+    setFilterCondition('');
   }
 
   const getTextOfSelect = (select: HTMLSelectElement, value: string): string => {
@@ -40,6 +43,10 @@ export default function Filter(): React.JSX.Element {
     let tempFilter = mainContext.listFilter.filter(filter => filter.column.value != column);
     mainContext.setListFilter(tempFilter);
   }
+
+  useEffect(() => {
+    mainContext.handleFilter();
+  }, [mainContext.listFilter])
 
   useEffect(() => {
     txtFilter.current?.focus();

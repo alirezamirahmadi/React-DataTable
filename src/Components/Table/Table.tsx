@@ -19,18 +19,6 @@ export default function Table() {
   const tableRef = useRef(null);
   mainContext.handlePrint = useReactToPrint({ content: () => tableRef.current, });
 
-  // const sortData = (fieldTitle: string) => {
-  //   let tempData = [...mainContext.rowData];
-  //   tempData.sort((a: any, b: any) => {
-  //     const nameA = typeof a[fieldTitle] === 'string' ? a[fieldTitle].toUpperCase() : a[fieldTitle];
-  //     const nameB = typeof b[fieldTitle] === 'string' ? b[fieldTitle].toUpperCase() : b[fieldTitle];
-  //     return nameA < nameB ? (sortedField.current.kind ? -1 : 1) : (sortedField.current.kind ? 1 : -1);
-  //   });
-  //   sortedField.current.title = fieldTitle;
-  //   sortedField.current.kind = !sortedField.current.kind;
-  //   mainContext.setRowData(tempData);
-  // }
-
   const selectAllRows = (checked: boolean) => {
     let selectRow = (document.querySelectorAll('.rdttable-row__select-cell') as NodeListOf<HTMLInputElement>);
     selectRow.forEach(element => {
@@ -68,10 +56,6 @@ export default function Table() {
   useEffect(() => {
     currentPage != 1 ? setCurrentPage(1) : pagination();
   }, [rowPerPage])
-
-  // useEffect(()=>{
-  //   sortData(sortedField.current.title);
-  // }, [])
 
   return (
     <div id='div-table' style={style}>
