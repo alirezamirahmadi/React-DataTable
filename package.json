@@ -1,7 +1,7 @@
 {
   "name": "react-datatable-responsive",
   "private": false,
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "src/ReactDataTable/ReactDataTable.tsx",
   "files": [
     "src"
@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-to-print": "^2.15.1"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",

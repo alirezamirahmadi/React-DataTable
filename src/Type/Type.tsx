@@ -137,6 +137,37 @@ type ButtonType = {
   classStyle?: 'button-main' | 'button-second' | 'button-text',
 }
 
+type PrintFont = {
+  family: string;
+  source: string;
+  weight?: string;
+  style?: string;
+}
+
+type ITriggerProps<T> = {
+  onClick: (event?: unknown) => void;
+  ref: (v: T) => void;
+}
+
+type IReactToPrintProps = {
+  bodyClass?: string;
+  children?: React.ReactNode;
+  content?: () => React.ReactInstance | null;
+  copyStyles?: boolean;
+  documentTitle?: string;
+  fonts?: PrintFont[];
+  nonce?: string;
+  onAfterPrint?: () => void;
+  onBeforeGetContent?: () => void | Promise<any>;
+  onBeforePrint?: () => void | Promise<any>;
+  onPrintError?: (errorLocation: "onBeforeGetContent" | "onBeforePrint" | "print", error: Error) => void;
+  pageStyle?: string | (() => string);
+  print?: (target: HTMLIFrameElement) => Promise<any>;
+  removeAfterPrint?: boolean;
+  suppressErrors?: boolean;
+  trigger?: <T>() => React.ReactElement<ITriggerProps<T>>;
+}
+
 type showMenuSubItemsType = { filter: boolean, search: boolean, displayColumns: boolean }
 
 type elemEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>
@@ -144,5 +175,6 @@ type elemEventType = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTM
 
 export type {
   ColumnType, FieldColumnType, filterType, PaginationType, ButtonType, OptionType,
-  ContextType, ReactDataTableType, elemEventType, ColumnOptionType, showMenuSubItemsType
+  ContextType, ReactDataTableType, elemEventType, ColumnOptionType, showMenuSubItemsType, 
+  PrintFont, IReactToPrintProps
 }

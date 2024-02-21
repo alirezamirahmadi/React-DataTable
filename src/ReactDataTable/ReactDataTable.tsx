@@ -3,7 +3,7 @@ import { createContext, useState, useRef, useEffect } from "react";
 import { ContextType, ReactDataTableType, filterType, ColumnType, ColumnOptionType, OptionType } from "../Type/Type";
 import Table from "../Components/Table/Table";
 import Menu from "../Components/Menu/Menu";
-import defaultOptions from "../Options/defaultOptions";
+import defaultOptions from "../Default/defaultOptions";
 import '../Style/main.css';
 
 const MainContext = createContext<ContextType>(
