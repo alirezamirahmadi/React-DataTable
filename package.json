@@ -1,7 +1,7 @@
 {
   "name": "react-datatable-responsive",
   "private": false,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -31,8 +31,8 @@
   "scripts": {
     "dev": "vite --port 2502",
     "build": "tsc && vite build",
-    "buildw": "webpack",
-    "buildr": "rollup -c",
+    "buildr": "rollup --config rollup.config.js",
+    "buildrts": "rollup --config rollupts.config.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest"

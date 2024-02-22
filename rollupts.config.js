@@ -9,7 +9,7 @@ export default {
     './src/ReactDataTable/ReactDataTable.tsx',
   ],
   output: [
-    { file: 'dist/index.js', format: 'esm', sourcemap: true, },
+    { file: "dist/index.d.ts", format: "es" }
   ],
   plugins: [
     resolve(),
@@ -18,6 +18,7 @@ export default {
       tsconfig: './tsconfig.build.json',
     }),
     postcss(),
+    dts(),
   ],
   external: ['react', 'react-dom'],
 };
