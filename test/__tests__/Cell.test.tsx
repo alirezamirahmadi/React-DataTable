@@ -98,7 +98,7 @@ test('it show values in progress', () => {
 test('it show component', () => {
     const column: ColumnType = {
         field: { title: 'title' }, label: 'Title', kind: "component",
-        options: { component: (value, onChange) => (<input value={value} onChange={(event: any) => onChange(event.target.value)} />) }
+        options: { component: (value, onChange) => (<input value={value} onChange={(event: any) => onChange && onChange(event.target.value)} />) }
     };
 
     render(<Cell row={ProductsData[2]} column={column} />);

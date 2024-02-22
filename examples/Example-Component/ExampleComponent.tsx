@@ -3,25 +3,25 @@ import DataTable from '../../src/ReactDataTable/ReactDataTable';
 import { ProductsData } from '../ExampleData/ExampleData';
 import { ColumnType } from '../../src/Type/Type';
 
-const ModifyStock = ({ value, onChange, rowData }: { value: string, onChange: (event: any) => void, rowData: any }): React.JSX.Element => {
-  const addCount = ()=> {
-    onChange((preValue:number) => preValue + 1);
+const ModifyStock = ({ value, onChange }: { value: string, onChange: (event: any) => void, rowData: any }): React.JSX.Element => {
+  const addCount = () => {
+    onChange((preValue: number) => preValue + 1);
   }
-  const minusCount = ()=> {
-    onChange((preValue:number) => preValue - 1);
+  const minusCount = () => {
+    onChange((preValue: number) => preValue - 1);
   }
-  
+
   return (
     <>
-      <div style={{ display: 'flex'}}>
-        <input type="button" value="-" style={{ width: '20px' }} onClick={minusCount}/>
-        <input type="text" value={value} onChange={event=> onChange(event.target.value)} style={{ width: '20px' }} />
-        <input type="button" value="+" style={{ width: '20px' }} onClick={addCount}/>
+      <div style={{ display: 'flex' }}>
+        <input type="button" value="-" style={{ width: '20px' }} onClick={minusCount} />
+        <input type="text" value={value} onChange={event => onChange(event.target.value)} style={{ width: '20px' }} />
+        <input type="button" value="+" style={{ width: '20px' }} onClick={addCount} />
       </div>
     </>
   )
 }
-const ProductCard = ({ value, onChange, rowData }: { value: string, onChange: (event: any) => void, rowData: any }): React.JSX.Element => {
+const ProductCard = ({ rowData }: { value: string, onChange: (event: any) => void, rowData: any }): React.JSX.Element => {
   return (
     <>
       <div style={{ border: '1px solid', borderRadius: '10px', width: '200px', padding: '10px' }}>
@@ -43,13 +43,13 @@ const ProductCard = ({ value, onChange, rowData }: { value: string, onChange: (e
 const columns: ColumnType[] = [
   {
     field: { title: 'card' }, label: 'Card', kind: 'component', options: {
-      component: (value, onChange, rowData) => (<ProductCard value={value} onChange={(event: any) => onChange(event.target.value)} rowData={rowData} />)
+      component: (value, onChange, rowData) => (<ProductCard value={value} onChange={(event: any) => onChange && onChange(event.target.value)} rowData={rowData} />)
     }
   },
   { field: { title: 'category' }, label: 'Category', },
   {
     field: { title: 'stock' }, label: 'Stock', kind: 'component', options: {
-      component: (value, onChange, rowData) => (<ModifyStock value={value} onChange={onChange} rowData={rowData} />)
+      component: (value, onChange, rowData) => (<ModifyStock value={value} onChange={() => onChange && onChange} rowData={rowData} />)
     }
   },
   { field: { title: 'date' }, label: 'Add date', },
@@ -58,6 +58,6 @@ const columns: ColumnType[] = [
 
 export default function Example(): React.JSX.Element {
   return (
-    <DataTable rows={ProductsData} columns={columns} options={{ color:{color:'#fff', backgroundColor:'#000', borderColor:'#666'}, cells: { imageWidth: 45 } }} />
+    <DataTable rows={ProductsData} columns={columns} options={{ color: { color: '#fff', backgroundColor: '#000', borderColor: '#666' }, cells: { imageWidth: 45 } }} />
   )
 }

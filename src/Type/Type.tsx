@@ -10,7 +10,7 @@ type ColumnOptionType = {
   search?: boolean,
   filter?: boolean,
   display?: boolean,
-  component?: (value: any, updateValue: (event: any) => void, rowData: any) => React.JSX.Element,
+  component?: (value?: any, updateValue?: (event: any) => void, rowData?: any) => React.JSX.Element,
 }
 
 type ColumnType = {
