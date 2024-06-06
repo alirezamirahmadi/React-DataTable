@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, useRef } from 'react';
+import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import Cell from '../Cell/Cell';
@@ -6,8 +7,6 @@ import Pagination from '../Pagination/Pagination';
 import { IconButtonArrowDown, IconButtonArrowUp } from '../IconButton/IconButton';
 import { showMenuSubItemsType } from '../../Type/Type';
 import './Table.css';
-import { PrintContextConsumer } from '../Print/PrintContext';
-import { Print } from '../Print/Print'
 
 export default function Table() {
   const mainContext = useContext(MainContext);
@@ -115,14 +114,14 @@ export default function Table() {
         }
         {mainContext.options?.pagination && <Pagination pageCount={Math.ceil(mainContext.rowData.length / rowPerPage)} currentPage={currentPage} pageNoHandler={pageNoHandler} previous next first last />}
       </div>
-      <Print content={() => tableRef.current}>
+      <ReactToPrint content={() => tableRef.current}>
         <PrintContextConsumer>
           {({ handlePrint }) => {
             mainContext.handlePrint = handlePrint;
             return null;
           }}
         </PrintContextConsumer>
-      </Print>
+      </ReactToPrint>
     </>
   )
 }
