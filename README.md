@@ -106,6 +106,31 @@ export default function Example(): React.JSX.Element {
 }
 ```
 
+#### nested objects
+
+``` js
+import ReactDataTable from 'react-datatable-responsive';
+import { ColumnType } from 'react-datatable-responsive';
+
+const columns: ColumnType[] = [
+  { field: { title: 'id' }, label: 'ID', options: { display: false } },
+  { field: { title: 'firstName' }, label: 'First Name' },
+  { field: { title: 'account.username' }, label: 'Username' },
+  { field: { title: 'address.home.street' }, label: 'Home Street' },
+]
+
+const data = [
+  { id:1, firstName:"Anna", account:{username:"annauser"}, address:{home:{street:"24"}}},
+  { id:2, firstName:"Lena", account:{username:"lenauser"}, address:{home:{street:"24"}}},
+]
+
+export default function Example(): React.JSX.Element {
+  return (
+    <ReactDataTable rows={data} columns={columns} />
+  )
+}
+```
+
 ## API
 
 #### ReactDataTable
