@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 
 import { MainContext } from '../../ReactDataTable/ReactDataTable';
 import { ColumnType, elemEventType } from "../../Type/Type";
+import { extractField } from '../../utils/functions';
 import './Cell.css';
 
 
@@ -32,16 +33,16 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
       case 'input/number':
       case 'input/password':
       case 'textarea':
-        setCellValue(row[column.field.title]);
+        setCellValue(extractField(row, column.field.title));
         break;
       case 'select':
-        setCellValue(row[column.field.title]?.index && row[column.field.title]?.options && row[column.field.title]?.index < row[column.field.title]?.options.length ? row[column.field.title].options[row[column.field.title]?.index] : row[column.field.title]?.options[0]);
+        setCellValue(extractField(row, column.field.title)?.index && extractField(row, column.field.title)?.options && extractField(row, column.field.title)?.index < extractField(row, column.field.title)?.options.length ? extractField(row, column.field.title).options[extractField(row, column.field.title)?.index] : extractField(row, column.field.title)?.options[0]);
         break;
       case 'boolean':
-        setCheckboxValue(row[column.field.title] ? row[column.field.title] : false);
+        setCheckboxValue(extractField(row, column.field.title) ? extractField(row, column.field.title) : false);
         break;
       case 'component':
-        setComponentValue(row[column.field.title]);
+        setComponentValue(extractField(row, column.field.title));
         break;
     }
 
@@ -70,7 +71,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
     case 'image':
       return (
         <>
-          <img src={row[column.field.title]} width={mainContext.options?.cells?.imageWidth} className='rdtcell-image' />
+          <img src={extractField(row, column.field.title)} width={mainContext.options?.cells?.imageWidth} className='rdtcell-image' />
         </>
       )
 
@@ -92,8 +93,8 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
       return (
         <>
           {
-            Array.isArray(row[column.field.title]) && (row[column.field.title]).length === 2 &&
-            <progress className="rdtcell-progress" value={row[column.field.title][0]} max={row[column.field.title][1]}>{row[column.field.title][0]}</progress>
+            Array.isArray(extractField(row, column.field.title)) && (extractField(row, column.field.title)).length === 2 &&
+            <progress className="rdtcell-progress" value={extractField(row, column.field.title)[0]} max={extractField(row, column.field.title)[1]}>{extractField(row, column.field.title)[0]}</progress>
           }
         </>
       )
@@ -102,13 +103,13 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
       return (
         <>
           {
-            row[column.field.title] &&
+            extractField(row, column.field.title) &&
             <select value={cellValue} className="rdtcell-select" onChange={(event) => onChangeInput(event, column.field.eventHandlerRow)}
               style={style}
             >
               {
-                Array.isArray(row[column.field.title].options) &&
-                row[column.field.title].options.map((value: any) => (
+                Array.isArray(extractField(row, column.field.title).options) &&
+                extractField(row, column.field.title).options.map((value: any) => (
                   <option key={value} className="rdtcell-select__option" value={value}>{value}</option>
                 ))
               }
@@ -125,7 +126,7 @@ export default function Cell({ column, row }: { column: ColumnType, row: any }):
     default:
       return (
         <>
-          <span className='rdtcell-text'>{row[column.field.title]}</span>
+          <span className='rdtcell-text'>{extractField(row, column.field.title)}</span>
         </>
       )
   }

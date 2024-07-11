@@ -4,6 +4,7 @@ import { ContextType, ReactDataTableType, filterType, ColumnType, ColumnOptionTy
 import Table from "../Components/Table/Table";
 import Menu from "../Components/Menu/Menu";
 import defaultOptions from "../Default/defaultOptions";
+import { extractField } from "../utils/functions";
 import '../Style/main.css';
 
 const MainContext = createContext<ContextType>(
@@ -52,16 +53,16 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     listFilter.map(filter => {
       switch (filter.condition.value) {
         case 'Equal':
-          tempRows = [...tempRows].filter(row => row[filter.column.value].toString() === filter.text);
+          tempRows = [...tempRows].filter(row => extractField(row, filter.column.value).toString() === filter.text);
           break;
         case 'NotEqual':
-          tempRows = [...tempRows].filter(row => row[filter.column.value].toString() != filter.text);
+          tempRows = [...tempRows].filter(row => extractField(row, filter.column.value).toString() != filter.text);
           break;
         case 'Include':
-          tempRows = [...tempRows].filter(row => row[filter.column.value].toString().includes(filter.text));
+          tempRows = [...tempRows].filter(row => extractField(row, filter.column.value).toString().includes(filter.text));
           break;
         case 'DontInclude':
-          tempRows = [...tempRows].filter(row => !row[filter.column.value].toString().includes(filter.text));
+          tempRows = [...tempRows].filter(row => !extractField(row, filter.column.value).toString().includes(filter.text));
           break;
 
         default:
@@ -81,7 +82,7 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
       row.map((data: any) => {
         includeValue = false;
         columns.map(column => {
-          if (column.options?.search != false && column.options?.display != false && (data[column.field.title] + '').toString().toLowerCase().includes(searchValue.toLowerCase())) includeValue = true;
+          if (column.options?.search != false && column.options?.display != false && (extractField(data, column.field.title) + '').toString().toLowerCase().includes(searchValue.toLowerCase())) includeValue = true;
         })
         includeValue && tempRow.push(data);
       })
