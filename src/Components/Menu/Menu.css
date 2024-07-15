@@ -2,15 +2,18 @@
   height: 35px;
   position: relative;
   border-bottom: 2px solid;
-  padding: 8px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .rdtmenu-select {
   height: 35px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid;
-  padding: 8px;
+  padding: 4px;
 }
 
 .rdtmenu-title{

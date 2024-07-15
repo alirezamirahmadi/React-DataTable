@@ -1,11 +1,14 @@
 .rdtpagination{
-    padding: 15px 20px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
 }
 
 .rdtpagination-pages{
     padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .rdtpagination-pages__no{
