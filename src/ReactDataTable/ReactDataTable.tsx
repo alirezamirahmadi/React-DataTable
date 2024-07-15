@@ -135,6 +135,10 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
       setSearchValue('');
     }, [showMenuSubItems.search])
 
+    useEffect(()=>{
+      setRowData(rows);
+    }, [rows])
+
   return (
     <>
       <MainContext.Provider value={{

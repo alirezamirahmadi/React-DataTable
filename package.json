@@ -1,7 +1,7 @@
 {
   "name": "react-datatable-responsive",
   "private": false,
-  "version": "1.0.9",
+  "version": "1.0.11",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
