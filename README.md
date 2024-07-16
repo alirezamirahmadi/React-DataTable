@@ -173,15 +173,10 @@ These class names are useful for styling with CSS. They are applied to the
 
 |Name|Description
 |:--:|:-----|
-|**`rdtcell-input`**|Styles applied to the input in cells|
-|**`rdtcell-textarea`**|Styles applied to the textarea in cells|
-|**`rdtcell-image`**|Styles applied to the image in cells|
-|**`rdtcell-checkbox`**|Styles applied to the checkbox in cells|
-|**`rdtcell-text`**|Styles applied to the text in cells|
-|**`rdtcell-progress`**|Styles applied to the progress in cells|
-|**`rdtcell-select`**|Styles applied to the to select in cells|
-|**`rdtcell-select__option`**|Styles applied to options in select|
-|**`rdtcell-button`**|Styles applied to the button in cells|
+|**`rdtdatatable`**|Styles applied to the data table|
+|**`rdtmenu-main`**|Styles applied to the menu box|
+|**`rdtmenu-select`**|Styles applied to the select menu box|
+|**`rdtmenu-title`**|Styles applied to the caption table|
 |**`rdtfilter`**|Styles applied to the filter box|
 |**`rdtfilter__title`**|Styles applied to the title of the filter box|
 |**`rdtfilter-item`**|Styles applied to the filter items box|
@@ -194,14 +189,6 @@ These class names are useful for styling with CSS. They are applied to the
 |**`rdtfilter-list`**|Styles applied to the filter list box|
 |**`rdtfilter-list__li`**|Styles applied to the filter list item|
 |**`rdtfilter-list__remove`**|Styles applied to the remove button on filter list item|
-|**`rdtmenu-main`**|Styles applied to the menu box|
-|**`rdtmenu-select`**|Styles applied to the select menu box|
-|**`rdtmenu-title`**|Styles applied to the caption table|
-|**`rdtpagination`**|Styles applied to the pagination box|
-|**`rdtpagination-pages`**|Styles applied to the number pagination box|
-|**`rdtpagination-pages__no`**|Styles applied to the number pagination|
-|**`rdtpagination-pages__no--select`**|Styles applied to the current page no|
-|**`rdtpagination-per-page`**|Styles applied to the per page select|
 |**`rdtsearch`**|Styles applied to the search box|
 |**`rdtsearch__input`**|Styles applied to the input on search box|
 |**`rdtsearch__close`**|Styles applied to the close button on search box|
@@ -209,9 +196,23 @@ These class names are useful for styling with CSS. They are applied to the
 |**`rdtshowcolumn__title`**|Styles applied to the caption show column box|
 |**`rdtshowcolumn__li`**|Styles applied to the list columns on show column box|
 |**`rdtshowcolumn__label`**|Styles applied to the label list columns on show column box|
-|**`rdttable-nodata`**|Styles applied to the no data alert|
 |**`rdttable`**|Styles applied to the table|
+|**`rdttable-nodata`**|Styles applied to the no data alert|
 |**`rdttable-header__label`**|Styles applied to the header label|
+|**`rdtcell-input`**|Styles applied to the input in cells|
+|**`rdtcell-textarea`**|Styles applied to the textarea in cells|
+|**`rdtcell-image`**|Styles applied to the image in cells|
+|**`rdtcell-checkbox`**|Styles applied to the checkbox in cells|
+|**`rdtcell-text`**|Styles applied to the text in cells|
+|**`rdtcell-progress`**|Styles applied to the progress in cells|
+|**`rdtcell-select`**|Styles applied to the to select in cells|
+|**`rdtcell-select__option`**|Styles applied to options in select|
+|**`rdtcell-button`**|Styles applied to the button in cells|
+|**`rdtpagination`**|Styles applied to the pagination box|
+|**`rdtpagination-pages`**|Styles applied to the number pagination box|
+|**`rdtpagination-pages__no`**|Styles applied to the number pagination|
+|**`rdtpagination-pages__no--select`**|Styles applied to the current page no|
+|**`rdtpagination-per-page`**|Styles applied to the per page select|
 
 ## Customize Columns
 
