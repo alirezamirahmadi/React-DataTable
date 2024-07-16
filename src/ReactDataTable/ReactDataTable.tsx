@@ -6,6 +6,7 @@ import Menu from "../Components/Menu/Menu";
 import defaultOptions from "../Default/defaultOptions";
 import { extractField } from "../utils/functions";
 import '../Style/main.css';
+import './ReactDataTable.css';
 
 const MainContext = createContext<ContextType>(
   {
@@ -162,7 +163,7 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
         handlePrint,
         displayColumn,
       }}>
-        <div id='div-datatable' dir={direction} >
+        <div id='div-datatable' className="rdtdatatable" dir={direction} >
           <Menu />
           <Table />
         </div>
