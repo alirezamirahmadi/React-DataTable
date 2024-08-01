@@ -126,19 +126,23 @@ export default function DataTable({ direction = 'ltr', columns, rows, options }:
     }
   }
 
-  const handlePrint = () => {}
+  const handlePrint = () => { }
 
-    useEffect(() => {
-      handleSearch();
-    }, [searchValue])
+  useEffect(() => {
+    handleSearch();
+  }, [searchValue])
 
-    useEffect(()=>{
-      setSearchValue('');
-    }, [showMenuSubItems.search])
+  useEffect(() => {
+    setSearchValue('');
+  }, [showMenuSubItems.search])
 
-    useEffect(()=>{
-      setRowData(rows);
-    }, [rows])
+  useEffect(() => {
+    setRowData(rows);
+  }, [rows])
+
+  useEffect(() => {
+    setColumnData(columns);
+  }, [columns])
 
   return (
     <>

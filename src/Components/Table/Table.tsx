@@ -40,6 +40,7 @@ export default function Table() {
   }
 
   const closeMenuSubItems = () => {
+    (mainContext.showMenuSubItems.filter || mainContext.showMenuSubItems.displayColumns) &&
     mainContext.setShowMenuSubItems((preValue: showMenuSubItemsType) => ({ ...preValue, filter: false, displayColumns: false }));
   }
 

@@ -169,7 +169,7 @@ export default function Example(): React.JSX.Element {
 
 #### CSS Classes
 
-These class names are useful for styling with CSS. They are applied to the
+These class names are useful for styling with CSS. They are applied to the component.
 
 |Name|Description
 |:--:|:-----|
