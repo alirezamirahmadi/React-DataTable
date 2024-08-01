@@ -3,8 +3,6 @@
   position: relative;
   border-bottom: 2px solid;
   padding: 4px;
-  display: flex;
-  align-items: center;
 }
 
 .rdtmenu-select {
